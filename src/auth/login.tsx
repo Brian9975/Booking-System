@@ -1,18 +1,15 @@
 
-import { useEffect } from "react";
+
 import GoogleLogo from "../assets/Google.png"
 import { useBookings } from "../context/BookingsContext";
 import useHandleLogin from "../hooks/useHandleLogin";
-import { getRedirectResult } from "firebase/auth";
-import { auth } from "../lib/firebase-config";
-import { useNavigate } from "react-router-dom";
 
 
 
 
 
 export default function Login() {
-const navigate = useNavigate()
+
 const {handleLogin, logWithGoogle, setEmail, setPassword} = useHandleLogin()
 const {loggedIn, setLoggedIn} = useBookings()
 
