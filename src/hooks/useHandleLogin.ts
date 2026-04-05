@@ -7,20 +7,18 @@ import {
 } from "firebase/auth";
 import { auth, provider } from "../lib/firebase-config";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 export default function useHandleLogin() {
   const { loggedIn } = useBookings();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (loggedIn) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        navigate("/customers");
         setTimeout(() => {
           alert("You are signed in successfully");
         }, 2000);
@@ -30,7 +28,6 @@ export default function useHandleLogin() {
     } else if (!loggedIn) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        navigate("/customers");
         setTimeout(() => {
           alert("Account Created Successfully");
         }, 2000);
@@ -43,7 +40,6 @@ export default function useHandleLogin() {
   const logWithGoogle = async () => {
     try {
       await signInWithPopup(auth, provider);
-      navigate("/customers");
       alert("You are logged in successfully");
     } catch (error) {
       alert(`An error occured while signing you in`);

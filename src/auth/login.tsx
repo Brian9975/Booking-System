@@ -1,8 +1,11 @@
 
 
+import { useEffect } from "react";
 import GoogleLogo from "../assets/Google.png"
+import { useAuth } from "../context/AuthContext";
 import { useBookings } from "../context/BookingsContext";
 import useHandleLogin from "../hooks/useHandleLogin";
+import {  useNavigate } from "react-router-dom";
 
 
 
@@ -12,6 +15,25 @@ export default function Login() {
 
 const {handleLogin, logWithGoogle, setEmail, setPassword} = useHandleLogin()
 const {loggedIn, setLoggedIn} = useBookings()
+const {user, loading} = useAuth()
+const navigate = useNavigate()
+
+
+
+
+useEffect(() => {
+ if (user) {
+  navigate("/customers")
+ }
+}, [user, loading, navigate])
+
+if (loading) {
+  return <div className="text-2xl">Loading...</div>
+}
+
+if (user) {
+  return null
+}
 
 
 

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./auth/login"
 import Customers from "./pages/customers"
 import Bookings from "./pages/bookings"
+import ProtectedRoute from "./components/layout/ProtectedRoute"
 
 function App() {
  
@@ -14,11 +15,11 @@ function App() {
 <Route path="/login" element={<Login/>}/>
 
 {/* Protected Routes */}
-<Route path="/customers" element={<Customers/>}/>
-<Route path="/bookings" element={<Bookings/>} />
+<Route path="/customers" element={<ProtectedRoute><Customers/></ProtectedRoute>}/>
+<Route path="/bookings" element={<ProtectedRoute><Bookings/></ProtectedRoute>} />
 
-<Route path="/" element={<Navigate to="/customers"/>}/>
-<Route path="*" element={<Navigate to="/login"/>}/>
+<Route path="/" element={<Navigate to="/customers" replace/>}/>
+<Route path="*" element={<Navigate to="/login" replace/>}/>
 
 </Routes>
 
