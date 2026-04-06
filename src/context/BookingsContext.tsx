@@ -1,20 +1,15 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type {BookingsContextType} from "../types/bookingsContext"
+import type {CustomerData} from "../types/customerData"
 
-
-
-interface BookingsContextType {
- loggedIn: boolean,
- setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
-
-
-}
 const BookingsContext = createContext<BookingsContextType | undefined>(undefined)
 export default function BookingsContextProvider({children}: {children: ReactNode}) {
     const [loggedIn, setLoggedIn] = useState(true)
+    const [customerData, setCustomerData] = useState<CustomerData[]>([])
 
 
 
-    const contextValues = {loggedIn, setLoggedIn}
+    const contextValues = {loggedIn, setLoggedIn, customerData, setCustomerData}
   return <BookingsContext value={contextValues}>{children}</BookingsContext>
 }
 
