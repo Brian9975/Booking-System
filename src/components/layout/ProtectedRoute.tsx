@@ -30,7 +30,7 @@ if (!user) {
  return null
 }
   return (
-    <div className="overflow-hidden bg-gradient-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
+    <div className="bg-gradient-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
   {/* Topbar */}
   <div className="bg-blue-200 border-b-2 border-lime-800 shadow-xl items-center justify-between flex py-3 px-2">
     <div> <h1 className="font-extrabold text-lg">C & B System</h1></div>
@@ -43,9 +43,9 @@ if (!user) {
   </div>
     
 
-    <div className="sm:flex">
+    <div className="sm:flex h-screen overflow-hidden">
     {/* sidebar */}
-    <div className="hidden flex-start sm:block min-h-screen top-0 sticky bg-blue-200 w-60">
+    <div className="hidden flex-start sm:block h-screen bg-blue-200 w-60">
         <div className=" flex flex-col items-center p-2">
 
             <div className="my-3 ">
