@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext"
 
 export default function useAddCustomer() {
  const [customerName, setCustomerName] = useState("")
- const [contact, setContact] = useState<number | null>()
+ const [contact, setContact] = useState<"" | number>("")
  const {user} = useAuth()
 
 
@@ -24,7 +24,7 @@ try {
     })
 
     setCustomerName("")
-    setContact(0)
+    setContact("")
     alert("New Customer Added Successfully")
 } catch (error) {
     alert(`Error while adding Customer!! ${error}`)

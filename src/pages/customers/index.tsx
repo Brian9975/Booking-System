@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { UserPlus } from "lucide-react";
 import useAddCustomer from "../../hooks/useAddCustomer";
@@ -9,14 +9,18 @@ import type { CustomerData } from "../../types/customerData";
 import { useAuth } from "../../context/AuthContext";
 import { formatToJsDate } from "../../helpers/dateFormatter";
 import useCustomerEdit from "../../hooks/useCustomerEdit";
+import useDeleteCustomer from "../../hooks/useDeleteCustomer";
+
 
 export default function Customers() {
-  const { setCustomerName, setContact, handleAddCustomer, customerName } =
+  const { setCustomerName, setContact, contact, handleAddCustomer, customerName } =
     useAddCustomer();
   const { customerData, setCustomerData } = useBookings();
   const { user } = useAuth();
-  const {setEditContact, setEditCusName, handleEdit, customerToEditInfo, setCustomerToEditInfo} = useCustomerEdit()
-
+  const {setEditContact,editCusName, editContact, setEditCusName, handleEdit, customerToEdit, setCustomerToEdit} = useCustomerEdit()
+  const [cusToDel, setCusToDel] = useState<string | null>(null)
+  const {handleDelCus} = useDeleteCustomer()
+  const customerToEditInfo = customerData.find(data => data.id === customerToEdit)
   useEffect(() => {
     const userId = user!.uid;
 
@@ -32,6 +36,16 @@ export default function Customers() {
     });
     return () => unsubscribe();
   }, []);
+
+
+  useEffect(() => {
+
+ 
+   if (customerToEditInfo) {
+     setEditCusName(customerToEditInfo.name)
+     setEditContact(Number(customerToEditInfo.contact))
+   }
+  },[customerToEdit])
   return (
     <div>
       <h1 className="text-2xl mb-8 text-center font-bold">Customers</h1>
@@ -65,6 +79,7 @@ export default function Customers() {
                 onChange={(e) => setContact(Number(e.target.value))}
                 className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
                 type="number"
+                value={contact}
                 placeholder="eg. 0711122222"
                 required
               />
@@ -108,8 +123,8 @@ export default function Customers() {
               <td className="border-2 px-2">{Number(data.contact)}</td>
               <td className="px-2">{formatToJsDate(data.createdAt)}</td>
               <td className="border-2 text-right px-2">
-                <button onClick={() => setCustomerToEditInfo(data)} className="bg-blue-800 shadow-lg my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
-                 <button className="bg-blue-100 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 shadow-lg mx-4">Delete</button>
+                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 shadow-lg my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
+                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 shadow-lg mx-4">Delete</button>
               </td>
             </tr>
           ))}
@@ -117,8 +132,8 @@ export default function Customers() {
       </table>
 
            {/* Edit Form */}  
-{ customerToEditInfo &&
-      <div onClick={() => setCustomerToEditInfo(null)} className="fixed inset-0  bg-black/50 flex items-center justify-center z-50">
+{ customerToEdit &&
+      <div onClick={() => setCustomerToEdit(null)} className="fixed inset-0  bg-black/50 flex items-center justify-center z-50">
            <div onClick={e => e.stopPropagation()} className="shadow-xl bg-white rounded-lg p-4 md:w-100 ">
           <h1 className="text-lg font-light text-blue-800">
            Edit Customer's Details
@@ -130,7 +145,7 @@ export default function Customers() {
                 Customer's Name
               </label>
               <input
-                defaultValue={customerToEditInfo.name}
+                value={editCusName}
                 onChange={(e) => setEditCusName(e.target.value)}
                 id="name"
                 className="border mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
@@ -147,7 +162,7 @@ export default function Customers() {
                 onChange={(e) => setEditContact(Number(e.target.value))}
                 className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
                 type="number"
-                defaultValue={Number(customerToEditInfo.contact)}
+                value={editContact}
                 placeholder="eg. 0711122222"
                 required
               />
@@ -157,7 +172,7 @@ export default function Customers() {
               <button
               className="cursor-pointer  px-6 py-2 shadow-lg bg-lime-300 rounded-lg"
               type="button"
-              onClick={() => setCustomerToEditInfo(null)}
+              onClick={() => setCustomerToEdit(null)}
             >
               <div className="font-bold">Cancel</div>
             </button>
@@ -178,19 +193,26 @@ export default function Customers() {
 
 
       }
-
-      <div className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center">
-       <div className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg">
+   {/* Delete Customer Dialog */}
+   { cusToDel &&
+      <div onClick={() => {
+        setCusToDel(null)
+      }} className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center">
+       <div onClick={e => e.stopPropagation()} className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg">
         <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
         <p>This action cannot be undone.</p>
 
         <div className="flex py-2 mt-4 justify-between items-center">
-          <button className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
-          <button className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+          <button onClick={() => setCusToDel(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => {
+            handleDelCus(cusToDel)
+            setCusToDel(null)
+            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
 
         </div>
        </div>
       </div>
+      }
     </div>
   );
 }

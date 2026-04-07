@@ -62,7 +62,7 @@ if (!user) {
         </div>
     </div>
 
-    <main className="p-2 overflow-y-auto flex-1">{children}</main>
+    <main className="p-2 h-screen overflow-y-auto sm:flex-1">{children}</main>
     </div>
     </div>
   )
