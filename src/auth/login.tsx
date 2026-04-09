@@ -22,7 +22,7 @@ const navigate = useNavigate()
 
 
 useEffect(() => {
- if (user) {
+ if (user && !loading) {
   navigate("/customers")
  }
 }, [user, loading, navigate])
@@ -37,7 +37,7 @@ if (user) {
 
 
 
-  return <div className="bg-gradient-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen flex justify-center items-center">
+  return <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen flex justify-center items-center">
    
     <div className="bg-blue-100 rounded-lg p-4 md:w-100 text-center">
 

@@ -13,7 +13,10 @@ const {user} = useAuth()
 const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
 e.preventDefault()
 const userId = user!.uid
-const docRef = doc(db, "customers", userId, "customers", customerToEdit!)
+if (customerToEdit === null) {
+ return
+}
+const docRef = doc(db, "customers", userId, "customers", customerToEdit)
 try{
  await updateDoc(docRef, {
   name: editCusName, 

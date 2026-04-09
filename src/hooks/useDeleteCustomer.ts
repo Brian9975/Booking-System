@@ -11,7 +11,7 @@ export default function useDeleteCustomer() {
         const docRef = doc(db, "customers", userId,  "customers", id)
        await deleteDoc(docRef)
      } catch(error) {
-
+       alert(`An error occured while deleting customer ${error}`)
      }
     }
   return {

@@ -1,1 +1,7 @@
-@import "tailwindcss"
+
+@import "tailwindcss";
+
+.my-select__option {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}

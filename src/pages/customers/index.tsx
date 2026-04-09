@@ -131,7 +131,7 @@ export default function Customers() {
         </tbody>
       </table>
 
-           {/* Edit Form */}  
+           {/* Edit Form Dialog */}  
 { customerToEdit &&
       <div onClick={() => setCustomerToEdit(null)} className="fixed inset-0  bg-black/50 flex items-center justify-center z-50">
            <div onClick={e => e.stopPropagation()} className="shadow-xl bg-white rounded-lg p-4 md:w-100 ">
