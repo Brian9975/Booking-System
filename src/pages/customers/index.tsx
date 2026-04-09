@@ -98,7 +98,7 @@ export default function Customers() {
       </div>
 
       {/* Customers Table Display */}
-      <table className="w-full">
+      <table className="w-full my-4">
         <thead>
           <tr>
             <th className="text-left text-blue-900 px-2 border-black  border-2">

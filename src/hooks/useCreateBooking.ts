@@ -32,6 +32,7 @@ export default function useCreateBooking() {
         setSelected(null)
         setService("")
         setDate("")
+        alert("Booking created successfully")
      } catch (error) {
         alert(`Error while creating booking ${error}`)
      }

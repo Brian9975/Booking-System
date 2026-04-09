@@ -3,10 +3,12 @@ import "../../index.css"
 import { CalendarPlus } from "lucide-react"
 import { db } from "../../lib/firebase-config"
 import { useState, useEffect } from "react"
-import { collection, onSnapshot, query } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 import type { CustomerData } from "../../types/customerData"
 import { useAuth } from "../../context/AuthContext"
 import useCreateBooking from "../../hooks/useCreateBooking"
+import { useBookings } from "../../context/BookingsContext"
+import type { BookingData } from "../../types/bookingData"
 export default function Bookings() {
 
   const [customerInfo, setCustomerInfo] = useState<CustomerData[]>([])
@@ -19,6 +21,7 @@ export default function Bookings() {
     
   )
   const {handleCreateBooking} = useCreateBooking()
+  const {setBookingInfo, bookingInfo} = useBookings()
 
   const options = customerInfo.map(data => ({
     label: data.name,
@@ -28,6 +31,18 @@ export default function Bookings() {
   const currentSelection = options.find(option => option.value === selected) || null
 
  
+  useEffect(() => {
+     const userId = user!.uid
+     const q = query(collection(db, "bookings", userId, "bookings"), orderBy("date", "asc"))
+   const unsubscribe = onSnapshot(q, (snap) => {
+    setBookingInfo(snap.docs.map(doc => ({
+      ...doc.data() as BookingData,
+      id: doc.id
+    })))
+   })
+
+   return () => unsubscribe()
+  }, [])
 
   useEffect(() => {
 
@@ -145,8 +160,51 @@ return () => unsubscribe()
            </div>
 
            {/* List of bookings */}
+     <table className="w-full my-4">
+            <thead>
+              <tr>
+                <th className="text-left text-blue-900 px-2 border-black  border-2">
+                  Customer
+                </th>
+                <th className="border-2 text-blue-900 border-black text-left px-2">
+                  Contact
+                </th>
+                <th className="border-2 text-blue-900 border-black text-left px-2">
+                  Service
+                </th>
+    
+                <th className="text-left px-7 text-blue-900 border-2 border-black">
+                  Date
+                </th>
+                <th className="border-2 text-blue-900 px-2 text-left border-black">
+                  Status
+                </th>
 
-           
+                <th className="border-2 text-right text-blue-900 px-5 border-black">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookingInfo.map((data) => (
+                <tr className="border-2" key={data.id}>
+                  <td className="px-2">{data.name}</td>
+                  <td className="border-2 px-2">{Number(data.contact)}</td>
+                  <td className="px-2">{data.service}</td>
+                  <td className="border-2 text-left px-2">
+                   {data.date}
+                  </td>
+                  <td className="border-2 text-left font-bold px-2">
+                    {data.status}
+                  </td>
+                  <td className="border-2 text-right px-2">
+                    <button className="bg-blue-100 rounded-lg py-2 font-bold shadow-lg cursor-pointer px-2 m-2">Mark as Done</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
      
     </div>
   )

@@ -35,8 +35,8 @@ if (!user) {
   <div className="bg-blue-200 border-b-2 border-lime-800 shadow-xl items-center justify-between flex py-3 px-2">
     <div> <h1 className="font-extrabold text-lg">C & B System</h1></div>
    <div>
-    <div className="bg-lime-300 flex justify-center items-center rounded-full h-9 w-9">
-        <div><p className="font-bold">J</p></div>
+    <div className="bg-lime-300 border flex justify-center items-center rounded-full h-9 w-9">
+        <div><p className="font-bold">{user !== null && user.email[0].toUpperCase()}</p></div>
         
     </div>
    </div>
