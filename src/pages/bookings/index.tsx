@@ -9,12 +9,19 @@ import { useAuth } from "../../context/AuthContext"
 import useCreateBooking from "../../hooks/useCreateBooking"
 import { useBookings } from "../../context/BookingsContext"
 import type { BookingData } from "../../types/bookingData"
+import useUpdateBooking from "../../hooks/useUpdateBooking"
+import { formatToJsDate } from "../../helpers/dateFormatter"
+import useDeleteBooking from "../../hooks/useDeleteBooking"
 export default function Bookings() {
 
+
+  const [bookingToMark, setBookingToMark] = useState<string | null>(null)
+  const [bookingToDel, setBookingToDel] = useState<string | null>(null)
   const [customerInfo, setCustomerInfo] = useState<CustomerData[]>([])
   const [selected, setSelected] = useState<string | null>(null)
   const [service, setService] = useState("")
   const {user} = useAuth()
+  
   const [date, setDate] = useState(() => {
     return ""
   }
@@ -22,6 +29,10 @@ export default function Bookings() {
   )
   const {handleCreateBooking} = useCreateBooking()
   const {setBookingInfo, bookingInfo} = useBookings()
+  const {updateBooking} = useUpdateBooking()
+  const {deleteBooking} = useDeleteBooking()
+
+
 
   const options = customerInfo.map(data => ({
     label: data.name,
@@ -192,19 +203,66 @@ return () => unsubscribe()
                   <td className="border-2 px-2">{Number(data.contact)}</td>
                   <td className="px-2">{data.service}</td>
                   <td className="border-2 text-left px-2">
-                   {data.date}
+                   {formatToJsDate(data.date)}
                   </td>
-                  <td className="border-2 text-left font-bold px-2">
+                  <td className={`border-2 text-left border-black font-bold px-2 ${data.status === "Done" ? "text-lime-700" : "text-amber-700"}`}>
                     {data.status}
                   </td>
                   <td className="border-2 text-right px-2">
-                    <button className="bg-blue-100 rounded-lg py-2 font-bold shadow-lg cursor-pointer px-2 m-2">Mark as Done</button>
+                    {data.status === "Pending" ? <button  onClick={() => setBookingToMark(data.id)} className="bg-lime-700 text-lime-100 rounded-lg py-2 font-bold shadow-md shadow-lime-950 cursor-pointer px-2 my-2">Mark as Done</button> : <button onClick={() => setBookingToDel(data.id)} className="bg-blue-100 py-2 px-7 my-2 rounded-lg font-bold cursor-pointer shadow-md shadow-black">Delete</button>}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
+
+   {/* Update Booking Status Dialog */}
+   { bookingToMark &&
+      <div onClick={() => {
+        setBookingToMark(null)
+      }} className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center">
+       <div onClick={e => e.stopPropagation()} className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg">
+        <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
+        <p>This will update the booking status to done.</p>
+
+        <div className="flex py-2 mt-4 justify-between items-center">
+          <button onClick={() => setBookingToMark(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => {
+            if (bookingToMark !== null) {
+            updateBooking(bookingToMark)
+            setBookingToMark(null)
+            }
+            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+
+        </div>
+       </div>
+      </div>
+      }
+
+
+         {/* Delete booking dialog */}
+   { bookingToDel &&
+      <div onClick={() => {
+        setBookingToDel(null)
+      }} className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center">
+       <div onClick={e => e.stopPropagation()} className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg">
+        <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
+        <p>This action cannot be undone.</p>
+
+        <div className="flex py-2 mt-4 justify-between items-center">
+          <button onClick={() => setBookingToDel(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => {
+            if (bookingToDel !== null) {
+            deleteBooking(bookingToDel)
+            setBookingToDel(null)
+            }
+            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+
+        </div>
+       </div>
+      </div>
+      }
      
     </div>
   )
