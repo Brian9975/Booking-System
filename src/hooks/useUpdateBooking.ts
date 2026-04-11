@@ -1,6 +1,7 @@
 import { doc, updateDoc } from "firebase/firestore"
 import { useAuth } from "../context/AuthContext"
 import { db } from "../lib/firebase-config"
+import { toast } from "sonner"
 
 
 export default function useUpdateBooking() {
@@ -15,9 +16,9 @@ export default function useUpdateBooking() {
         await updateDoc(docRef, {
             status: "Done"
         })
-        alert("Booking status updated successfully")
+       toast.success("Booking status updated successfully", {position: "top-center"})
     } catch (error) {
-        alert(`An Error occured while updating booking.Please try again. "${error}"`)
+        toast.error(`An Error occured while updating booking.Please try again. "${error}"`, {position: "top-center"})
     }
 
 

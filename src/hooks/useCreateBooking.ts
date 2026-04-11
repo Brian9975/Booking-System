@@ -3,6 +3,7 @@ import type { CustomerData } from '../types/customerData'
 import { useAuth } from '../context/AuthContext'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../lib/firebase-config'
+import { toast } from 'sonner'
 
 export default function useCreateBooking() {
    const {user} = useAuth()
@@ -32,9 +33,9 @@ export default function useCreateBooking() {
         setSelected(null)
         setService("")
         setDate("")
-        alert("Booking created successfully")
+        toast.success("Booking created successfully", {position: "top-center"})
      } catch (error) {
-        alert(`Error while creating booking ${error}`)
+        toast.error(`Error while creating booking ${error}`, {position: "top-center"})
      }
     }
 

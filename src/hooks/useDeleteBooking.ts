@@ -1,6 +1,7 @@
 
 import { deleteDoc, doc } from 'firebase/firestore'
 import { useAuth } from '../context/AuthContext'
+import {toast} from "sonner"
 
 import {db} from "../lib/firebase-config"
 
@@ -15,9 +16,9 @@ const {user} = useAuth()
 
     try{
      await deleteDoc(docRef);
-     alert("Booking deleted successfully")
+     toast.success("Booking deleted successfully", {position: "top-center"})
     } catch(error) {
-      alert(`Failed to delete booking. ${error}`)
+      toast.error(`Failed to delete booking. ${error}`, {position: "top-center"})
     }
 
     

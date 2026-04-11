@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { LogOut, CalendarCheck, Contact } from "lucide-react";
+import { Toaster } from "../ui/sonner";
 
 
 
@@ -63,6 +64,7 @@ if (!user) {
     </div>
 
     <main className="p-2 h-screen overflow-y-auto sm:flex-1">{children}</main>
+    <Toaster className="z-50"/>
     </div>
     </div>
   )

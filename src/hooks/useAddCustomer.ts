@@ -1,6 +1,7 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { useState } from "react"
 import { db } from "../lib/firebase-config"
+import { toast } from "sonner"
 import { useAuth } from "../context/AuthContext"
 
 
@@ -25,9 +26,9 @@ try {
 
     setCustomerName("")
     setContact("")
-    alert("New Customer Added Successfully")
+    toast.success("New Customer Added Successfully", {position: "top-center"})
 } catch (error) {
-    alert(`Error while adding Customer!! ${error}`)
+  toast.error(`Error while adding Customer!! ${error}`, {position: "top-center"})
 }
   
   }

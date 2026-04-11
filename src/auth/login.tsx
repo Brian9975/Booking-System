@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { useBookings } from "../context/BookingsContext";
 import useHandleLogin from "../hooks/useHandleLogin";
 import {  useNavigate } from "react-router-dom";
+import { Toaster } from "sonner";
 
 
 
@@ -44,10 +45,14 @@ if (user) {
        <h1 className="font-bold text-2xl">{loggedIn ? "Login" : "Sign Up"}</h1>
     <form onSubmit={handleLogin} className="mb-5">
      <div>
-     <input onChange={(e) => setEmail(e.target.value)} className="border ring w-full my-5 rounded placeholder-gray-600 px-2 py-1" type="email" placeholder="Email"/>
+      <div className="text-left mb-1 mt-4">
+     <label className="font-bold">Email</label></div>
+     <input onChange={(e) => setEmail(e.target.value)} className="border ring w-full mb-5 rounded placeholder-gray-600 px-2 py-1" type="email" placeholder="Email" required />
      </div>
        <div>
-     <input onChange={e => setPassword(e.target.value)} className="border ring w-full placeholder-gray-600 my-5 rounded px-2 py-1" type="password" placeholder="Password"/>
+      <div className="text-left mb-1">
+     <label className="font-bold">Password</label></div>
+     <input onChange={e => setPassword(e.target.value)} className="border ring w-full placeholder-gray-600 mb-5 rounded px-2  py-1" type="password" placeholder="Password" required/>
      </div>
      <button className="cursor-pointer w-full py-1 bg-blue-800 text-white rounded px-2">{loggedIn ? "Login" : "Create Account"}</button>
     </form>
@@ -66,5 +71,6 @@ if (user) {
       <button onClick={logWithGoogle} className="cursor-pointer px-2 py-1  w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-gradient-to-b from-blue-200 from-10% to-lime-200 to-90%"><div><img className="w-5" src={GoogleLogo} alt="Google Logo" /></div><div>Sign In With Google</div></button>
     </div>
     </div>
+    <Toaster/>
   </div>;
 }

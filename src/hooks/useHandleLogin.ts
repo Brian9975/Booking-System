@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, provider } from "../lib/firebase-config";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 export default function useHandleLogin() {
@@ -20,19 +21,19 @@ export default function useHandleLogin() {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         setTimeout(() => {
-          alert("You are signed in successfully");
+         toast.success("You are signed in successfully");
         }, 2000);
       } catch (error) {
-        alert(`An error occured when signing in ${error}`);
+        toast.error(`An error occured when signing in ${error}`);
       }
     } else if (!loggedIn) {
       try {
         await createUserWithEmailAndPassword(auth, email, password);
         setTimeout(() => {
-          alert("Account Created Successfully");
+          toast.success("Account Created Successfully");
         }, 2000);
       } catch (error) {
-        alert(`An error occured while creating account ${error}`);
+        toast.error(`An error occured while creating account ${error}`);
       }
     }
   };
@@ -40,9 +41,9 @@ export default function useHandleLogin() {
   const logWithGoogle = async () => {
     try {
       await signInWithPopup(auth, provider);
-      alert("You are logged in successfully");
+      toast.success("You are logged in successfully", {position: "top-center"});
     } catch (error) {
-      alert(`An error occured while signing you in`);
+      toast.error(`An error occured while signing you in`, {position: "top-center"});
     }
   };
   return { handleLogin, email, password, setEmail, setPassword, logWithGoogle };

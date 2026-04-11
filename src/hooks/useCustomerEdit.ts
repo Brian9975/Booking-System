@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import {toast} from "sonner"
 import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../lib/firebase-config"
 import { useAuth } from "../context/AuthContext"
@@ -23,9 +23,9 @@ try{
   contact: editContact,
  })
 
-alert("Customer Details Edited Successfully")
+toast.success("Customer Details Edited Successfully", {position: "top-center"})
 } catch(error) {
-  alert(`An Error Occured while Editing Customer's Details ${error}`)
+  toast.error(`An Error Occured while Editing Customer's Details ${error}`, {position: "top-center"})
 } finally{
   setCustomerToEdit(null)
 }

@@ -2,6 +2,9 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 import type { User } from 'firebase/auth'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { auth } from '../lib/firebase-config'
+import { toast } from 'sonner'
+
+
 
 
 interface AuthContextType {
@@ -25,7 +28,7 @@ export default function AuthContextProvider({children}: {children: React.ReactNo
         await signOut(auth)
         
      } catch (error) {
-        alert(`An Error Occured while Logging Out!! ${error}`)
+        toast.error(`An Error Occured while Logging Out!! ${error}`, {position: "top-center"})
      }
    }
 
