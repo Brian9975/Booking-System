@@ -13,13 +13,22 @@ import useDeleteCustomer from "../../hooks/useDeleteCustomer";
 
 
 export default function Customers() {
-  const { setCustomerName, setContact, contact, handleAddCustomer, customerName } =
+  const { setCustomerName, loadingCus, setContact, contact, handleAddCustomer, customerName } =
     useAddCustomer();
   const { customerData, setCustomerData } = useBookings();
   const { user } = useAuth();
   const {setEditContact,editCusName, editContact, setEditCusName, handleEdit, customerToEdit, setCustomerToEdit} = useCustomerEdit()
   const [cusToDel, setCusToDel] = useState<string | null>(null)
   const {handleDelCus} = useDeleteCustomer()
+
+
+ if (loadingCus) {
+  return <div className="min-h-screen ">
+
+  </div>
+ }
+
+  
   const customerToEditInfo = customerData.find(data => data.id === customerToEdit)
   useEffect(() => {
     const userId = user!.uid;

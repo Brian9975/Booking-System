@@ -11,7 +11,8 @@ export default function useCreateBooking() {
     const handleCreateBooking = async (e: React.FormEvent<HTMLFormElement>, customerInfo: CustomerData[], selected: string, service: string, date: string, setSelected: React.Dispatch<React.SetStateAction<string | null>>, setService:  React.Dispatch<React.SetStateAction<string>>, setDate:  React.Dispatch<React.SetStateAction<string>>) => {
       e.preventDefault()
       if (!selected) {
-        alert("Select customer to continue")
+        toast.warning("Select customer to continue", {position: "top-center"})
+        return
       }
 
      const userId = user!.uid
