@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import type { CustomerData } from '../types/customerData'
 import { useAuth } from '../context/AuthContext'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'

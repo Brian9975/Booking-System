@@ -2,7 +2,6 @@ import { useState } from "react"
 import {toast} from "sonner"
 import { doc, updateDoc } from "firebase/firestore"
 import { db } from "../lib/firebase-config"
-import useAddCustomer from "./useAddCustomer"
 import { useAuth } from "../context/AuthContext"
 import { useBookings } from "@/context/BookingsContext"
 
