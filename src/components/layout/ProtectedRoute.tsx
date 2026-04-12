@@ -34,16 +34,23 @@ if (loading) {
 if (!user) {
  return null
 }
+
+console.log(user.photoURL)
   return (
     <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
   {/* Topbar */}
   <div className="bg-blue-200 border-b-2 border-lime-800 shadow-xl items-center justify-between flex py-3 px-2">
     <div> <h1 className="font-extrabold text-lg">C & B System</h1></div>
    <div>
-    <div className="bg-lime-300 border flex justify-center items-center rounded-full h-9 w-9">
-        <div><p className="font-bold">{user !== null && user.email![0].toUpperCase()}</p></div>
-        
+  
+  { user.photoURL ?
+    <div style={{backgroundImage: `url(${user.photoURL })`}} className={`bg-center bg-cover rounded-full h-9 w-9`}>
     </div>
+
+    :  <div className="h-9 w-9 bg-lime-600 rounded-full flex justify-center items-center text-lime-100">
+       <div  ><p className="font-bold">{user.email![0].toUpperCase()}</p></div>
+    </div>
+}
    </div>
   </div>
     
