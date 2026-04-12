@@ -12,6 +12,7 @@ import type { BookingData } from "../../types/bookingData"
 import useUpdateBooking from "../../hooks/useUpdateBooking"
 import { formatToJsDate } from "../../helpers/dateFormatter"
 import useDeleteBooking from "../../hooks/useDeleteBooking"
+import { Spinner } from "@/components/ui/spinner"
 export default function Bookings() {
 
 
@@ -28,9 +29,10 @@ export default function Bookings() {
     
   )
   const {handleCreateBooking} = useCreateBooking()
-  const {setBookingInfo, bookingInfo} = useBookings()
+  const {setBookingInfo, bookingInfo, loadingOnAct} = useBookings()
   const {updateBooking} = useUpdateBooking()
   const {deleteBooking} = useDeleteBooking()
+  
 
 
 
@@ -53,7 +55,7 @@ export default function Bookings() {
    })
 
    return () => unsubscribe()
-  }, [])
+  }, [setBookingInfo, user])
 
   useEffect(() => {
 
@@ -68,7 +70,17 @@ export default function Bookings() {
       )))
     })
 return () => unsubscribe()
-  }, [])
+  }, [user])
+
+    if (loadingOnAct) {
+   return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+    <Spinner className="size-10"/>
+      <div>
+        <p className="font-light text-lg">Saving...</p>
+      </div>
+      
+   </div>
+  }
   return (
     <div>
      <h1 className="text-2xl mb-8 text-center font-bold">Bookings Management</h1>

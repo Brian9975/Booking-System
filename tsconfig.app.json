@@ -23,11 +23,6 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-  
-
-    // Resolve imports
-
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"

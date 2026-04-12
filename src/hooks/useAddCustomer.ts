@@ -3,18 +3,19 @@ import { useState } from "react"
 import { db } from "../lib/firebase-config"
 import { toast } from "sonner"
 import { useAuth } from "../context/AuthContext"
+import { useBookings } from "@/context/BookingsContext"
 
 
 export default function useAddCustomer() {
  const [customerName, setCustomerName] = useState("")
  const [contact, setContact] = useState<"" | number>("")
-  const [loadingCus, setLoadingCus] = useState(false)
  const {user} = useAuth()
+ const {setLoadingOnAct} = useBookings()
 
 
   const handleAddCustomer = async (e: React.FormEvent<HTMLFormElement>) => {
    e.preventDefault()
-   setLoadingCus(true)
+   setLoadingOnAct(true)
 
 const userId = user!.uid
 const collectionRef = collection(db, "customers", userId, "customers");
@@ -32,7 +33,7 @@ try {
 } catch (error) {
   toast.error(`Error while adding Customer!! ${error}`, {position: "top-center"})
 } finally{
-  setLoadingCus(false)
+  setLoadingOnAct(false)
 }
   
   }
@@ -40,5 +41,5 @@ try {
 
 
 
-  return {handleAddCustomer,loadingCus, setCustomerName, setContact, contact, customerName}
+  return {handleAddCustomer, setCustomerName, setContact, contact, customerName}
 }

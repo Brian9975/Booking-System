@@ -10,23 +10,20 @@ import { useAuth } from "../../context/AuthContext";
 import { formatToJsDate } from "../../helpers/dateFormatter";
 import useCustomerEdit from "../../hooks/useCustomerEdit";
 import useDeleteCustomer from "../../hooks/useDeleteCustomer";
+import { Spinner } from "@/components/ui/spinner";
 
 
 export default function Customers() {
-  const { setCustomerName, loadingCus, setContact, contact, handleAddCustomer, customerName } =
+  const { setCustomerName, setContact, contact, handleAddCustomer, customerName } =
     useAddCustomer();
   const { customerData, setCustomerData } = useBookings();
   const { user } = useAuth();
   const {setEditContact,editCusName, editContact, setEditCusName, handleEdit, customerToEdit, setCustomerToEdit} = useCustomerEdit()
   const [cusToDel, setCusToDel] = useState<string | null>(null)
   const {handleDelCus} = useDeleteCustomer()
+  const {loadingOnAct} = useBookings()
 
 
- if (loadingCus) {
-  return <div className="min-h-screen ">
-
-  </div>
- }
 
   
   const customerToEditInfo = customerData.find(data => data.id === customerToEdit)
@@ -44,7 +41,7 @@ export default function Customers() {
       );
     });
     return () => unsubscribe();
-  }, []);
+  }, [setCustomerData, user]);
 
 
   useEffect(() => {
@@ -54,7 +51,19 @@ export default function Customers() {
      setEditCusName(customerToEditInfo.name)
      setEditContact(Number(customerToEditInfo.contact))
    }
-  },[customerToEdit])
+  },[customerToEdit, customerToEditInfo, setEditCusName, setEditContact])
+
+
+
+  if (loadingOnAct) {
+   return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+    <Spinner className="size-10"/>
+      <div>
+        <p className="font-light text-lg">Saving...</p>
+      </div>
+      
+   </div>
+  }
   return (
     <div>
       <h1 className="text-2xl mb-8 text-center font-bold">Customers</h1>

@@ -7,6 +7,7 @@ import { useBookings } from "../context/BookingsContext";
 import useHandleLogin from "../hooks/useHandleLogin";
 import {  useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
 
 
 
@@ -15,7 +16,7 @@ import { Toaster } from "sonner";
 export default function Login() {
 
 const {handleLogin, logWithGoogle, setEmail, setPassword} = useHandleLogin()
-const {loggedIn, setLoggedIn} = useBookings()
+const {loggedIn, setLoggedIn, loadingOnAct} = useBookings()
 const {user, loading} = useAuth()
 const navigate = useNavigate()
 
@@ -29,7 +30,17 @@ useEffect(() => {
 }, [user, loading, navigate])
 
 if (loading) {
-  return <div className="text-2xl">Loading...</div>
+  return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+    <Spinner className="size-15"/>
+      
+   </div>
+}
+
+if (loadingOnAct) {
+  return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <Spinner className="size-15"/>
+        
+     </div>
 }
 
 if (user) {

@@ -9,15 +9,16 @@ export default function BookingsContextProvider({children}: {children: ReactNode
     const [loggedIn, setLoggedIn] = useState(true)
     const [customerData, setCustomerData] = useState<CustomerData[]>([])
     const [bookingInfo, setBookingInfo] = useState<BookingData[]>([])
+     const [loadingOnAct, setLoadingOnAct] = useState(false)
 
 
 
-    const contextValues = {loggedIn, setLoggedIn, customerData, setCustomerData, bookingInfo, setBookingInfo}
+    const contextValues = {loggedIn, loadingOnAct, setLoadingOnAct, setLoggedIn, customerData, setCustomerData, bookingInfo, setBookingInfo}
   return <BookingsContext value={contextValues}>{children}</BookingsContext>
 }
 
 export const useBookings = () => {
- let context = useContext(BookingsContext)
+ const context = useContext(BookingsContext)
 
  if (context === undefined) {
     throw new Error("useBookings must be within BookingsContextProvider")

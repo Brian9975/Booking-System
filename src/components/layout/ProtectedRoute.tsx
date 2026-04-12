@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { LogOut, CalendarCheck, Contact } from "lucide-react";
 import { Toaster } from "../ui/sonner";
+import { Spinner } from "../ui/spinner";
 
 
 
@@ -22,7 +23,10 @@ useEffect(() => {
 
 
 if (loading) {
-    return <div className="text-2xl">Loading...</div>
+    return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+    <Spinner className="size-15"/>
+      
+   </div>
 }
 
 
@@ -31,13 +35,13 @@ if (!user) {
  return null
 }
   return (
-    <div className="bg-gradient-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
+    <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
   {/* Topbar */}
   <div className="bg-blue-200 border-b-2 border-lime-800 shadow-xl items-center justify-between flex py-3 px-2">
     <div> <h1 className="font-extrabold text-lg">C & B System</h1></div>
    <div>
     <div className="bg-lime-300 border flex justify-center items-center rounded-full h-9 w-9">
-        <div><p className="font-bold">{user !== null && user.email[0].toUpperCase()}</p></div>
+        <div><p className="font-bold">{user !== null && user.email![0].toUpperCase()}</p></div>
         
     </div>
    </div>

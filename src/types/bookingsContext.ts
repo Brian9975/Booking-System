@@ -10,5 +10,7 @@ export interface BookingsContextType {
  setCustomerData: React.Dispatch<React.SetStateAction<CustomerData[]>>
  bookingInfo: BookingData[],
  setBookingInfo: React.Dispatch<React.SetStateAction<BookingData[]>>
+ loadingOnAct: boolean,
+ setLoadingOnAct: React.Dispatch<React.SetStateAction<boolean>>
 
 }
