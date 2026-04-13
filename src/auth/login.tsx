@@ -51,7 +51,16 @@ if (user) {
 
 
 
-  return <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen flex justify-center items-center">
+  return <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen ">
+
+<div className="mb-7 text-center pt-5">
+  <h1 className="text-center text-3xl sm:text-lg font-bold">Welcome To Your Booking Manager.</h1>
+  <p className="my-5 "> Where All Your Customers And Bookings Are Managed Simply in one Place.Please Login or Sign Up to get started.</p>
+
+  <p></p>
+</div>
+    <div className="flex justify-center items-center">
+    
    
     <div className="bg-blue-100 rounded-lg p-4 md:w-100 text-center">
 
@@ -86,7 +95,8 @@ if (user) {
     <hr className="my-4"/>
     <p>or</p>
     <div>
-      <button onClick={logWithGoogle} className="cursor-pointer px-2 py-1  w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-gradient-to-b from-blue-200 from-10% to-lime-200 to-90%"><div><img className="w-5" src={GoogleLogo} alt="Google Logo" /></div><div>Sign In With Google</div></button>
+      <button onClick={logWithGoogle} className="cursor-pointer px-2 py-1  w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-linear-to-b from-blue-200 from-10% to-lime-200 to-90%"><div><img className="w-5" src={GoogleLogo} alt="Google Logo" /></div><div>Continue With Google</div></button>
+    </div>
     </div>
     </div>
     <Toaster/>

@@ -6,6 +6,10 @@
   pointer-events: auto !important;
 }
 
+body {
+  font-family: "Inter", "sans-serif";
+}
+
 
 @layer base {
   :root {
