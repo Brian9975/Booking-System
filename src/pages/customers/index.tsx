@@ -69,7 +69,7 @@ export default function Customers() {
   }
   return (
     <div>
-      <h1 className="text-2xl mb-8 text-center font-bold">Customers</h1>
+      <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">Customers</h1>
       <div className="flex justify-center pb-5">
         <div className="bg-blue-100  rounded-lg p-4 md:w-100 ">
           <h1 className="text-lg font-light text-blue-800">
@@ -146,7 +146,7 @@ export default function Customers() {
           {customerData.map((data) => (
             <tr className="border-2" key={data.id}>
               <td className="px-2">{data.name}</td>
-              <td className="border-2 px-2">{Number(data.contact)}</td>
+              <td className="border-2 px-2">0{Number(data.contact)}</td>
               <td className="px-2">{formatToJsDate(data.createdAt)}</td>
               <td className=" border-2 text-right px-2">
                 <div className="flex flex-col gap-2  items-end justify-center m-2">
@@ -203,14 +203,14 @@ export default function Customers() {
 
 <div className="flex justify-between items-center">
               <button
-              className="cursor-pointer  px-6 py-2 shadow-lime-900 shadow-md bg-lime-300 rounded-lg"
+              className="cursor-pointer  px-6 py-2 shadow-lime-600 shadow-md bg-lime-300 rounded-lg"
               type="button"
               onClick={() => setCustomerToEdit(null)}
             >
               <div className="font-bold">Cancel</div>
             </button>
             <button
-              className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-lg gap-3 mt-2 text-blue-100 bg-blue-800"
+              className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-md gap-3 mt-2 text-blue-100 bg-blue-800"
               type="submit"
             >
               <div className="font-bold">Save</div>
@@ -236,11 +236,11 @@ export default function Customers() {
         <p>This action cannot be undone.</p>
 
         <div className="flex py-2 mt-4 justify-between items-center">
-          <button onClick={() => setCusToDel(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => setCusToDel(null)} className="bg-lime-300 shadow-md shadow-lime-600 cursor-pointer py-2 px-6 rounded-lg">Cancel</button>
           <button onClick={() => {
             handleDelCus(cusToDel)
             setCusToDel(null)
-            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+            }} className="bg-blue-800 cursor-pointer py-2 px-6 rounded-lg shadow-md shadow-blue-950  text-blue-100">Continue</button>
 
         </div>
        </div>

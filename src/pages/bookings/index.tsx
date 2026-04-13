@@ -86,7 +86,7 @@ return () => unsubscribe()
   }
   return (
     <div>
-     <h1 className="text-2xl mb-8 text-center font-bold">Bookings Management</h1>
+     <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">Bookings Management</h1>
 
 
 
@@ -220,7 +220,7 @@ return () => unsubscribe()
               {bookingInfo.map((data) => (
                 <tr className="border-2" key={data.id}>
                   <td className="px-2">{data.name}</td>
-                  <td className="border-2 px-2">{Number(data.contact)}</td>
+                  <td className="border-2 px-2">0{Number(data.contact)}</td>
                   <td className="px-2">{data.service}</td>
                   <td className="border-2 text-left px-4">
                    {formatToJsDate(data.date)}
@@ -229,7 +229,7 @@ return () => unsubscribe()
                     {data.status}
                   </td>
                   <td className="border-2 text-right px-2">
-                    {data.status === "Pending" ? <button  onClick={() => setBookingToMark(data.id)} className="bg-lime-700 text-lime-100 rounded-lg py-2 font-bold shadow-md shadow-lime-950 cursor-pointer px-2 my-2">Mark as Done</button> : <button onClick={() => setBookingToDel(data.id)} className="bg-blue-100 py-2 px-7 my-2 rounded-lg font-bold cursor-pointer shadow-md shadow-black">Delete</button>}
+                    {data.status === "Pending" ? <button  onClick={() => setBookingToMark(data.id)} className="bg-lime-700 text-lime-100 text-sm sm:text-md w-30 sm:w-40 rounded-lg py-2 font-bold shadow-md shadow-lime-950 cursor-pointer px-2 my-2">Mark as Done</button> : <button onClick={() => setBookingToDel(data.id)} className="bg-blue-100 py-2 px-7 my-2 rounded-lg font-bold cursor-pointer shadow-md shadow-black">Delete</button>}
                   </td>
                 </tr>
               ))}
@@ -247,13 +247,13 @@ return () => unsubscribe()
         <p>This will update the booking status to done.</p>
 
         <div className="flex py-2 mt-4 justify-between items-center">
-          <button onClick={() => setBookingToMark(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => setBookingToMark(null)} className="bg-lime-300 cursor-pointer shadow-md shadow-lime-600 py-2 px-6 rounded-lg">Cancel</button>
           <button onClick={() => {
             if (bookingToMark !== null) {
             updateBooking(bookingToMark)
             setBookingToMark(null)
             }
-            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+            }} className="bg-blue-800 cursor-pointer py-2 px-6 shadow-md shadow-blue-950 rounded-lg text-blue-100">Continue</button>
 
         </div>
        </div>
@@ -271,13 +271,13 @@ return () => unsubscribe()
         <p>This action cannot be undone.</p>
 
         <div className="flex py-2 mt-4 justify-between items-center">
-          <button onClick={() => setBookingToDel(null)} className="bg-lime-300 cursor-pointer py-1 px-5 rounded-lg">Cancel</button>
+          <button onClick={() => setBookingToDel(null)} className="bg-lime-300 cursor-pointer shadow-md shadow-lime-600  py-2 px-6 rounded-lg">Cancel</button>
           <button onClick={() => {
             if (bookingToDel !== null) {
             deleteBooking(bookingToDel)
             setBookingToDel(null)
             }
-            }} className="bg-blue-800 cursor-pointer py-1 px-5 rounded-lg text-blue-100">Continue</button>
+            }} className="bg-blue-800 shadow-blue-950 shadow-md cursor-pointer py-2 px-6 rounded-lg text-blue-100">Continue</button>
 
         </div>
        </div>

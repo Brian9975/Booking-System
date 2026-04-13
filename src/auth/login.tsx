@@ -68,7 +68,7 @@ if (user) {
      <div className="relative mb-5">
      <input onChange={e => setPassword(e.target.value)} className="border ring w-full placeholder-gray-600 rounded px-2  py-1" type={`${showPassword ? "text" : "password"}`} placeholder="Password" required/>
      <button onClick={() => setShowPassword(!showPassword)} type="button" className="absolute cursor-pointer hover:opacity-70 right-1 top-1/2 -translate-y-1/2">
-      {showPassword ? <EyeOff/> : <Eye/>}
+      {showPassword ? <Eye/> : <EyeOff/>}
      </button>
      </div>
      </div>
