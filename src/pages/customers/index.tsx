@@ -11,6 +11,7 @@ import { formatToJsDate } from "../../helpers/dateFormatter";
 import useCustomerEdit from "../../hooks/useCustomerEdit";
 import useDeleteCustomer from "../../hooks/useDeleteCustomer";
 import { Spinner } from "@/components/ui/spinner";
+import SkeletonTable from "@/components/skeletonTable"
 
 
 export default function Customers() {
@@ -22,6 +23,7 @@ export default function Customers() {
   const [cusToDel, setCusToDel] = useState<string | null>(null)
   const {handleDelCus} = useDeleteCustomer()
   const {loadingOnAct} = useBookings()
+  const [loadingData, setLoadingData] = useState(true)
 
 
 
@@ -39,6 +41,7 @@ export default function Customers() {
           id: doc.id,
         })),
       );
+      setLoadingData(false)
     });
     return () => unsubscribe();
   }, [setCustomerData, user]);
@@ -67,7 +70,6 @@ export default function Customers() {
   return (
     <div>
       <h1 className="text-2xl mb-8 text-center font-bold">Customers</h1>
-
       <div className="flex justify-center pb-5">
         <div className="bg-blue-100  rounded-lg p-4 md:w-100 ">
           <h1 className="text-lg font-light text-blue-800">
@@ -116,6 +118,8 @@ export default function Customers() {
       </div>
 
       {/* Customers Table Display */}
+      {  
+      loadingData ? <SkeletonTable/> :
       <table className="w-full my-4">
         <thead>
           <tr>
@@ -141,13 +145,14 @@ export default function Customers() {
               <td className="border-2 px-2">{Number(data.contact)}</td>
               <td className="px-2">{formatToJsDate(data.createdAt)}</td>
               <td className="border-2 text-right px-2">
-                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 shadow-lg my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
-                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 shadow-lg mx-4">Delete</button>
+                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
+                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950  mx-4">Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+}
 
            {/* Edit Form Dialog */}  
 { customerToEdit &&
@@ -231,6 +236,7 @@ export default function Customers() {
        </div>
       </div>
       }
+      
     </div>
   );
 }

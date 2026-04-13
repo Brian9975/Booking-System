@@ -13,6 +13,7 @@ import useUpdateBooking from "../../hooks/useUpdateBooking"
 import { formatToJsDate } from "../../helpers/dateFormatter"
 import useDeleteBooking from "../../hooks/useDeleteBooking"
 import { Spinner } from "@/components/ui/spinner"
+import SkeletonTable from "@/components/skeletonTable"
 export default function Bookings() {
 
 
@@ -22,6 +23,7 @@ export default function Bookings() {
   const [selected, setSelected] = useState<string | null>(null)
   const [service, setService] = useState("")
   const {user} = useAuth()
+  const [loadingData, setLoadingData] = useState(true)
   
   const [date, setDate] = useState(() => {
     return ""
@@ -52,10 +54,11 @@ export default function Bookings() {
       ...doc.data() as BookingData,
       id: doc.id
     })))
+    setLoadingData(false)
    })
 
    return () => unsubscribe()
-  }, [setBookingInfo, user])
+  }, [])
 
   useEffect(() => {
 
@@ -183,6 +186,7 @@ return () => unsubscribe()
            </div>
 
            {/* List of bookings */}
+          { loadingData ? <SkeletonTable/> :
      <table className="w-full my-4">
             <thead>
               <tr>
@@ -226,7 +230,7 @@ return () => unsubscribe()
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table>}
 
 
    {/* Update Booking Status Dialog */}

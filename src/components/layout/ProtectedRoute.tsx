@@ -35,7 +35,7 @@ if (!user) {
  return null
 }
 
-console.log(user.photoURL)
+
   return (
     <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
   {/* Topbar */}
