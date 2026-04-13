@@ -1,6 +1,6 @@
 
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GoogleLogo from "../assets/Google.png"
 import { useAuth } from "../context/AuthContext";
 import { useBookings } from "../context/BookingsContext";
@@ -8,6 +8,7 @@ import useHandleLogin from "../hooks/useHandleLogin";
 import {  useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
+import { Eye, EyeOff } from "lucide-react";
 
 
 
@@ -19,6 +20,7 @@ const {handleLogin, logWithGoogle, setEmail, setPassword} = useHandleLogin()
 const {loggedIn, setLoggedIn, loadingOnAct} = useBookings()
 const {user, loading} = useAuth()
 const navigate = useNavigate()
+const [showPassword, setShowPassword] = useState(false)
 
 
 
@@ -60,10 +62,15 @@ if (user) {
      <label className="font-bold">Email</label></div>
      <input onChange={(e) => setEmail(e.target.value)} className="border ring w-full mb-5 rounded placeholder-gray-600 px-2 py-1" type="email" placeholder="Email" required />
      </div>
-       <div>
-      <div className="text-left mb-1">
+       <div> 
+      <div className="text-left  mb-1">
      <label className="font-bold">Password</label></div>
-     <input onChange={e => setPassword(e.target.value)} className="border ring w-full placeholder-gray-600 mb-5 rounded px-2  py-1" type="password" placeholder="Password" required/>
+     <div className="relative mb-5">
+     <input onChange={e => setPassword(e.target.value)} className="border ring w-full placeholder-gray-600 rounded px-2  py-1" type={`${showPassword ? "text" : "password"}`} placeholder="Password" required/>
+     <button onClick={() => setShowPassword(!showPassword)} type="button" className="absolute cursor-pointer hover:opacity-70 right-1 top-1/2 -translate-y-1/2">
+      {showPassword ? <EyeOff/> : <Eye/>}
+     </button>
+     </div>
      </div>
      <button className="cursor-pointer w-full py-1 bg-blue-800 text-white rounded px-2">{loggedIn ? "Login" : "Create Account"}</button>
     </form>
