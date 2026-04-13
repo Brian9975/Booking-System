@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { UserPlus } from "lucide-react";
+import { UserPlus, UserX } from "lucide-react";
 import useAddCustomer from "../../hooks/useAddCustomer";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../lib/firebase-config";
@@ -119,7 +119,11 @@ export default function Customers() {
 
       {/* Customers Table Display */}
       {  
-      loadingData ? <SkeletonTable/> :
+      loadingData ? <SkeletonTable/> : customerData.length === 0 ? <div className="text-center mt-4 mb-7 flex border-2 rounded-lg p-2 justify-center flex-col items-center">
+        <UserX size={50} />
+        <h1 className="text-xl mt-1 font-bold">No customers added at the moment!</h1>
+        <p>Fill the form above to add new customer.</p>
+      </div> :
       <table className="w-full my-4">
         <thead>
           <tr>
@@ -133,7 +137,7 @@ export default function Customers() {
               Date Added
             </th>
 
-            <th className="text-right px-7 text-blue-900 border-2 border-black">
+            <th className="text-right px-5 text-blue-900 border-2 border-black">
               Actions
             </th>
           </tr>
@@ -144,9 +148,15 @@ export default function Customers() {
               <td className="px-2">{data.name}</td>
               <td className="border-2 px-2">{Number(data.contact)}</td>
               <td className="px-2">{formatToJsDate(data.createdAt)}</td>
-              <td className="border-2 text-right px-2">
-                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
-                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950  mx-4">Delete</button>
+              <td className=" border-2 text-right px-2">
+                <div className="flex flex-col gap-2  items-end justify-center m-2">
+                 <div>
+                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 w-30 h-10  shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
+                </div>
+                <div>
+                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 w-30  h-10 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 ">Delete</button>
+                 </div>
+                 </div>
               </td>
             </tr>
           ))}
@@ -193,14 +203,14 @@ export default function Customers() {
 
 <div className="flex justify-between items-center">
               <button
-              className="cursor-pointer  px-6 py-2 shadow-lg bg-lime-300 rounded-lg"
+              className="cursor-pointer  px-6 py-2 shadow-lime-900 shadow-md bg-lime-300 rounded-lg"
               type="button"
               onClick={() => setCustomerToEdit(null)}
             >
               <div className="font-bold">Cancel</div>
             </button>
             <button
-              className="cursor-pointer px-6 py-2 rounded-lg shadow-lg gap-3 mt-2 bg-linear-to-b from-blue-800 from-10% to-lime-100 to-90%"
+              className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-lg gap-3 mt-2 text-blue-100 bg-blue-800"
               type="submit"
             >
               <div className="font-bold">Save</div>

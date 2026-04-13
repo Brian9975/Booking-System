@@ -1,6 +1,6 @@
 import Select from "react-select"
 import "../../index.css"
-import { CalendarPlus } from "lucide-react"
+import { CalendarPlus, CalendarX } from "lucide-react"
 import { db } from "../../lib/firebase-config"
 import { useState, useEffect } from "react"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
@@ -186,7 +186,11 @@ return () => unsubscribe()
            </div>
 
            {/* List of bookings */}
-          { loadingData ? <SkeletonTable/> :
+          { loadingData ? <SkeletonTable/> :  bookingInfo.length === 0 ? <div className="text-center mt-4 flex border-2 mb-7 rounded-lg p-2 justify-center flex-col items-center">
+                  <CalendarX size={50} />
+                  <h1 className="text-xl mt-1 font-bold">No bookings added yet!</h1>
+                  <p>You can create a booking in the form above.</p>
+                </div> :
      <table className="w-full my-4">
             <thead>
               <tr>
@@ -200,7 +204,7 @@ return () => unsubscribe()
                   Service
                 </th>
     
-                <th className="text-left px-7 text-blue-900 border-2 border-black">
+                <th className="text-left px-4 text-blue-900 border-2 border-black">
                   Date
                 </th>
                 <th className="border-2 text-blue-900 px-2 text-left border-black">
@@ -218,7 +222,7 @@ return () => unsubscribe()
                   <td className="px-2">{data.name}</td>
                   <td className="border-2 px-2">{Number(data.contact)}</td>
                   <td className="px-2">{data.service}</td>
-                  <td className="border-2 text-left px-2">
+                  <td className="border-2 text-left px-4">
                    {formatToJsDate(data.date)}
                   </td>
                   <td className={`border-2 text-left border-black font-bold px-2 ${data.status === "Done" ? "text-lime-700" : "text-amber-700"}`}>

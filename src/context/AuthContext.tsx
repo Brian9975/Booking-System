@@ -23,12 +23,15 @@ export default function AuthContextProvider({children}: {children: React.ReactNo
     
     
 
-   const logout = async() => {
+   const logout = async () => {
+    setLoading(true)
      try {
         await signOut(auth)
         
      } catch (error) {
         toast.error(`An Error Occured while Logging Out!! ${error}`, {position: "top-center"})
+     } finally{
+       setLoading(false)
      }
    }
 
