@@ -1,10 +1,10 @@
-export const formatToJsDate  = (dateValue: any) => {
-      if (!dateValue) return 'N/A';
+export const formatToJsDate = (dateValue: any) => {
+  if (!dateValue) return "N/A";
 
   // 1. Convert to a real JS Date object regardless of source type
   let date: Date;
-  
-  if (typeof dateValue.toDate === 'function') {
+
+  if (typeof dateValue.toDate === "function") {
     // It's a Firestore Timestamp
     date = dateValue.toDate();
   } else if (dateValue instanceof Date) {
@@ -19,9 +19,9 @@ export const formatToJsDate  = (dateValue: any) => {
   }
 
   // 2. Format to "March 25, 2026"
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 };

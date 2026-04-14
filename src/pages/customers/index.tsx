@@ -11,24 +11,35 @@ import { formatToJsDate } from "../../helpers/dateFormatter";
 import useCustomerEdit from "../../hooks/useCustomerEdit";
 import useDeleteCustomer from "../../hooks/useDeleteCustomer";
 import { Spinner } from "@/components/ui/spinner";
-import SkeletonTable from "@/components/skeletonTable"
-
+import SkeletonTable from "@/components/skeletonTable";
 
 export default function Customers() {
-  const { setCustomerName, setContact, contact, handleAddCustomer, customerName } =
-    useAddCustomer();
+  const {
+    setCustomerName,
+    setContact,
+    contact,
+    handleAddCustomer,
+    customerName,
+  } = useAddCustomer();
   const { customerData, setCustomerData } = useBookings();
   const { user } = useAuth();
-  const {setEditContact,editCusName, editContact, setEditCusName, handleEdit, customerToEdit, setCustomerToEdit} = useCustomerEdit()
-  const [cusToDel, setCusToDel] = useState<string | null>(null)
-  const {handleDelCus} = useDeleteCustomer()
-  const {loadingOnAct} = useBookings()
-  const [loadingData, setLoadingData] = useState(true)
+  const {
+    setEditContact,
+    editCusName,
+    editContact,
+    setEditCusName,
+    handleEdit,
+    customerToEdit,
+    setCustomerToEdit,
+  } = useCustomerEdit();
+  const [cusToDel, setCusToDel] = useState<string | null>(null);
+  const { handleDelCus } = useDeleteCustomer();
+  const { loadingOnAct } = useBookings();
+  const [loadingData, setLoadingData] = useState(true);
 
-
-
-  
-  const customerToEditInfo = customerData.find(data => data.id === customerToEdit)
+  const customerToEditInfo = customerData.find(
+    (data) => data.id === customerToEdit,
+  );
   useEffect(() => {
     const userId = user!.uid;
 
@@ -41,35 +52,33 @@ export default function Customers() {
           id: doc.id,
         })),
       );
-      setLoadingData(false)
+      setLoadingData(false);
     });
     return () => unsubscribe();
   }, [setCustomerData, user]);
 
-
   useEffect(() => {
-
- 
-   if (customerToEditInfo) {
-     setEditCusName(customerToEditInfo.name)
-     setEditContact(Number(customerToEditInfo.contact))
-   }
-  },[customerToEdit, customerToEditInfo, setEditCusName, setEditContact])
-
-
+    if (customerToEditInfo) {
+      setEditCusName(customerToEditInfo.name);
+      setEditContact(Number(customerToEditInfo.contact));
+    }
+  }, [customerToEdit, customerToEditInfo, setEditCusName, setEditContact]);
 
   if (loadingOnAct) {
-   return <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
-    <Spinner className="size-10"/>
-      <div>
-        <p className="font-light text-lg">Saving...</p>
+    return (
+      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+        <Spinner className="size-10" />
+        <div>
+          <p className="font-light text-lg">Saving...</p>
+        </div>
       </div>
-      
-   </div>
+    );
   }
   return (
     <div>
-      <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">Customers</h1>
+      <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">
+        Customers
+      </h1>
       <div className="flex justify-center pb-5">
         <div className="bg-blue-100  rounded-lg p-4 md:w-100 ">
           <h1 className="text-lg font-light text-blue-800">
@@ -112,141 +121,168 @@ export default function Customers() {
               <div>Add Customer</div>
             </button>
           </form>
-
-        
         </div>
       </div>
 
       {/* Customers Table Display */}
-      {  
-      loadingData ? <SkeletonTable/> : customerData.length === 0 ? <div className="text-center mt-4 mb-7 flex border-2 rounded-lg p-2 justify-center flex-col items-center">
-        <UserX size={50} />
-        <h1 className="text-xl mt-1 font-bold">No customers added at the moment!</h1>
-        <p>Fill the form above to add new customer.</p>
-      </div> :
-      <table className="w-full my-4">
-        <thead>
-          <tr>
-            <th className="text-left text-blue-900 px-2 border-black  border-2">
-              Name
-            </th>
-            <th className="border-2 text-blue-900 border-black text-left px-2">
-              Contact
-            </th>
-            <th className="border-2 text-blue-900 border-black text-left px-2">
-              Date Added
-            </th>
-
-            <th className="text-right px-5 text-blue-900 border-2 border-black">
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {customerData.map((data) => (
-            <tr className="border-2" key={data.id}>
-              <td className="px-2">{data.name}</td>
-              <td className="border-2 px-2">0{Number(data.contact)}</td>
-              <td className="px-2">{formatToJsDate(data.createdAt)}</td>
-              <td className=" border-2 text-right px-2">
-                <div className="flex flex-col gap-2  items-end justify-center m-2">
-                 <div>
-                <button onClick={() => setCustomerToEdit(data.id)} className="bg-blue-800 w-30 h-10  shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 ">Edit</button>
-                </div>
-                <div>
-                 <button onClick={() => setCusToDel(data.id)} className="bg-blue-100 w-30  h-10 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 ">Delete</button>
-                 </div>
-                 </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-}
-
-           {/* Edit Form Dialog */}  
-{ customerToEdit &&
-      <div onClick={() => setCustomerToEdit(null)} className="fixed inset-0  bg-black/50 flex items-center justify-center z-50">
-           <div onClick={e => e.stopPropagation()} className="shadow-xl bg-white rounded-lg p-4 md:w-100 ">
-          <h1 className="text-lg font-light text-blue-800">
-           Edit Customer's Details
+      {loadingData ? (
+        <SkeletonTable />
+      ) : customerData.length === 0 ? (
+        <div className="text-center mt-4 mb-7 flex border-2 rounded-lg p-2 justify-center flex-col items-center">
+          <UserX size={50} />
+          <h1 className="text-xl mt-1 font-bold">
+            No customers added at the moment!
           </h1>
-          <hr className="mb-4" />
-          <form onSubmit={handleEdit} className="mb-2">
-            <div>
-              <label htmlFor="name" className="font-bold">
-                Customer's Name
-              </label>
-              <input
-                value={editCusName}
-                onChange={(e) => setEditCusName(e.target.value)}
-                id="name"
-                className="border mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
-                type="text"
-                placeholder="eg. John Doe"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="name" className="font-bold">
-                Customer's Contact
-              </label>
-              <input
-                onChange={(e) => setEditContact(Number(e.target.value))}
-                className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
-                type="number"
-                value={editContact}
-                placeholder="eg. 0711122222"
-                required
-              />
-            </div>
+          <p>Fill the form above to add new customer.</p>
+        </div>
+      ) : (
+        <table className="w-full my-4">
+          <thead>
+            <tr>
+              <th className="text-left text-blue-900 px-2 border-black  border-2">
+                Name
+              </th>
+              <th className="border-2 text-blue-900 border-black text-left px-2">
+                Contact
+              </th>
+              <th className="border-2 text-blue-900 border-black text-left px-2">
+                Date Added
+              </th>
 
-<div className="flex justify-between items-center">
+              <th className="text-right px-5 text-blue-900 border-2 border-black">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {customerData.map((data) => (
+              <tr className="border-2" key={data.id}>
+                <td className="px-2">{data.name}</td>
+                <td className="border-2 px-2">0{Number(data.contact)}</td>
+                <td className="px-2">{formatToJsDate(data.createdAt)}</td>
+                <td className=" border-2 text-right px-2">
+                  <div className="flex flex-col gap-2  items-end justify-center m-2">
+                    <div>
+                      <button
+                        onClick={() => setCustomerToEdit(data.id)}
+                        className="bg-blue-800 w-30 h-10  shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 "
+                      >
+                        Edit
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => setCusToDel(data.id)}
+                        className="bg-blue-100 w-30  h-10 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 "
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {/* Edit Form Dialog */}
+      {customerToEdit && (
+        <div
+          onClick={() => setCustomerToEdit(null)}
+          className="fixed inset-0  bg-black/50 flex items-center justify-center z-50"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="shadow-xl bg-white rounded-lg p-4 md:w-100 "
+          >
+            <h1 className="text-lg font-light text-blue-800">
+              Edit Customer's Details
+            </h1>
+            <hr className="mb-4" />
+            <form onSubmit={handleEdit} className="mb-2">
+              <div>
+                <label htmlFor="name" className="font-bold">
+                  Customer's Name
+                </label>
+                <input
+                  value={editCusName}
+                  onChange={(e) => setEditCusName(e.target.value)}
+                  id="name"
+                  className="border mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
+                  type="text"
+                  placeholder="eg. John Doe"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="name" className="font-bold">
+                  Customer's Contact
+                </label>
+                <input
+                  onChange={(e) => setEditContact(Number(e.target.value))}
+                  className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
+                  type="number"
+                  value={editContact}
+                  placeholder="eg. 0711122222"
+                  required
+                />
+              </div>
+
+              <div className="flex justify-between items-center">
+                <button
+                  className="cursor-pointer  px-6 py-2 shadow-lime-600 shadow-md bg-lime-300 rounded-lg"
+                  type="button"
+                  onClick={() => setCustomerToEdit(null)}
+                >
+                  <div className="font-bold">Cancel</div>
+                </button>
+                <button
+                  className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-md gap-3 mt-2 text-blue-100 bg-blue-800"
+                  type="submit"
+                >
+                  <div className="font-bold">Save</div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* Delete Customer Dialog */}
+      {cusToDel && (
+        <div
+          onClick={() => {
+            setCusToDel(null);
+          }}
+          className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg"
+          >
+            <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
+            <p>This action cannot be undone.</p>
+
+            <div className="flex py-2 mt-4 justify-between items-center">
               <button
-              className="cursor-pointer  px-6 py-2 shadow-lime-600 shadow-md bg-lime-300 rounded-lg"
-              type="button"
-              onClick={() => setCustomerToEdit(null)}
-            >
-              <div className="font-bold">Cancel</div>
-            </button>
-            <button
-              className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-md gap-3 mt-2 text-blue-100 bg-blue-800"
-              type="submit"
-            >
-              <div className="font-bold">Save</div>
-            </button>
-
+                onClick={() => setCusToDel(null)}
+                className="bg-lime-300 shadow-md shadow-lime-600 cursor-pointer py-2 px-6 rounded-lg"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  handleDelCus(cusToDel);
+                  setCusToDel(null);
+                }}
+                className="bg-blue-800 cursor-pointer py-2 px-6 rounded-lg shadow-md shadow-blue-950  text-blue-100"
+              >
+                Continue
+              </button>
             </div>
-          
-          </form>
-
-        
+          </div>
         </div>
-      </div>
-
-
-      }
-   {/* Delete Customer Dialog */}
-   { cusToDel &&
-      <div onClick={() => {
-        setCusToDel(null)
-      }} className="inset-0 z-50 fixed bg-black/50 flex justify-center items-center">
-       <div onClick={e => e.stopPropagation()} className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg">
-        <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
-        <p>This action cannot be undone.</p>
-
-        <div className="flex py-2 mt-4 justify-between items-center">
-          <button onClick={() => setCusToDel(null)} className="bg-lime-300 shadow-md shadow-lime-600 cursor-pointer py-2 px-6 rounded-lg">Cancel</button>
-          <button onClick={() => {
-            handleDelCus(cusToDel)
-            setCusToDel(null)
-            }} className="bg-blue-800 cursor-pointer py-2 px-6 rounded-lg shadow-md shadow-blue-950  text-blue-100">Continue</button>
-
-        </div>
-       </div>
-      </div>
-      }
-      
+      )}
     </div>
   );
 }
