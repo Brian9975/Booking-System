@@ -54,8 +54,8 @@ if (user) {
   return <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen ">
 
 <div className="mb-7 text-center pt-5">
-  <h1 className="text-center text-3xl sm:text-lg font-bold">Welcome To Your Booking Manager.</h1>
-  <p className="my-5 "> Where All Your Customers And Bookings Are Managed Simply in one Place.Please Login or Sign Up to get started.</p>
+  <h1 className="text-center text-3xl sm:text-lg font-bold px-2">Welcome To Your Booking Manager.</h1>
+  <p className="my-5 text-sm md:text-md"> Where All Your Customers And Bookings Are Managed Simply in one Place.Please Login or Sign Up to get started.</p>
 
   <p></p>
 </div>

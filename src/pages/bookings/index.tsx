@@ -170,7 +170,7 @@ return () => unsubscribe()
                    <div>
                     <label className="font-bold" htmlFor="date">Pick a date</label>
                   
-                    <input value={date} onChange={e => setDate(e.target.value)} id="date" className="w-full border-2 py-1 px-2 rounded-md mb-4 cursor-pointer" type="date" required/>
+                    <input value={date} onChange={e => setDate(e.target.value)} id="date" className="w-full border-2 py-1 px-2 rounded-md mb-4 cursor-pointer" type="date"  min={new Date().toISOString().split('T')[0]} required/>
                   </div>
                  <button
                    className="cursor-pointer font-bold px-2 py-2 w-full rounded bg-blue-900 text-blue-100 shadow-lg flex justify-center items-center gap-3 mt-2 "
