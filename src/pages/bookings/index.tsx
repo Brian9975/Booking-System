@@ -212,6 +212,7 @@ export default function Bookings() {
           <p>You can create a booking in the form above.</p>
         </div>
       ) : (
+        <div className="overflow-x-auto">
         <table className="w-full my-4">
           <thead>
             <tr>
@@ -272,6 +273,7 @@ export default function Bookings() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       {/* Update Booking Status Dialog */}

@@ -136,6 +136,7 @@ export default function Customers() {
           <p>Fill the form above to add new customer.</p>
         </div>
       ) : (
+        <div className="overflow-x-auto">
         <table className="w-full my-4">
           <thead>
             <tr>
@@ -184,6 +185,7 @@ export default function Customers() {
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       {/* Edit Form Dialog */}
