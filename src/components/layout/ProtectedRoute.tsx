@@ -29,7 +29,7 @@ export default function ProtectedRoute({
 
   if (loading) {
     return (
-      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <div className="bg-slate-100 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
         <Spinner className="size-15" />
       </div>
     );
@@ -40,9 +40,9 @@ export default function ProtectedRoute({
   }
 
   return (
-    <div className="bg-linear-to-b  from-blue-500 from-10% to-lime-300 to-90% min-h-screen">
+    <div className="bg-slate-100 text-slate-950 min-h-screen">
       {/* Topbar */}
-      <div className="bg-blue-200 border-b-2 border-lime-800 shadow-xl items-center justify-between flex py-3 px-2">
+      <div className="bg-slate-800 text-slate-100 border-b-2 border-slate-950 shadow-slate-600 shadow-md items-center justify-between flex py-3 px-2">
         <div>
           {" "}
           <h1 className="font-extrabold text-lg">C & B System</h1>
@@ -73,21 +73,21 @@ export default function ProtectedRoute({
         </div>
       </div>
       {showMenu && (
-        <div className="bg-blue-200  text-center sm:hidden p-2 shadow-md shadow-blue-950">
+        <div className="bg-slate-800 text-center sm:hidden p-2 shadow-md shadow-slate-600">
           <div className="py-1">
-            <Link className="font-bold text-lg text-blue-950" to="/customers">
+            <Link className="font-bold text-lg hover:opacity-80 text-slate-50" to="/customers">
               Customers
             </Link>
           </div>
           <div className="py-2">
-            <Link className="font-bold  text-lg text-blue-950" to="/bookings">
+            <Link className="font-bold hover:opacity-80 text-lg text-slate-50" to="/bookings">
               Bookings
             </Link>
           </div>
           <div>
             <button
               onClick={logout}
-              className="bg-lime-400 shadow-lime-700 shadow-lg cursor-pointer px-6 py-1 my-2 rounded-lg"
+              className="bg-lime-400 shadow-lime-700 shadow-md hover:opacity-80 cursor-pointer px-6 py-1 my-2 rounded-lg"
             >
               Logout
             </button>
@@ -97,12 +97,12 @@ export default function ProtectedRoute({
 
       <div className="sm:flex h-screen overflow-hidden">
         {/* sidebar */}
-        <div className="hidden flex-start sm:block h-screen bg-blue-200 w-60">
+        <div className="hidden flex-start sm:block h-screen bg-slate-800 w-60">
           <div className=" flex flex-col items-center p-2">
             <div className="my-3 ">
               <button
                 onClick={() => navigate("/customers")}
-                className="bg-blue-900  my-2 py-2 px-15 cursor-pointer hover:bg-blue-800 text-blue-100 rounded-md"
+                className="bg-slate-700  my-2 py-2 px-15 cursor-pointer hover:bg-slate-600 text-blue-100 rounded-md"
               >
                 <div className="flex items-center gap-2 justify-center">
                   <Contact />
@@ -113,7 +113,7 @@ export default function ProtectedRoute({
             <div>
               <button
                 onClick={() => navigate("/bookings")}
-                className="bg-blue-900  my-2  px-15 p-2 cursor-pointer hover:bg-blue-800 text-blue-100 rounded-md"
+                className="bg-slate-700  my-2  px-15 p-2 cursor-pointer hover:bg-slate-600 text-blue-100 rounded-md"
               >
                 <div className="flex justify-center gap-2 items-center">
                   <CalendarCheck />
@@ -123,7 +123,7 @@ export default function ProtectedRoute({
             </div>
             <button
               onClick={logout}
-              className="bg-lime-400 mt-5 shadow-lg shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
+              className="bg-lime-400 mt-5 shadow-md shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
             >
               <div className="flex gap-2 justify-center items-center ">
                 <LogOut size={20} />
@@ -133,7 +133,7 @@ export default function ProtectedRoute({
           </div>
         </div>
 
-        <main className="p-2 h-screen overflow-y-auto sm:flex-1">
+        <main className="p-2 mt-4 h-screen overflow-y-auto sm:flex-1">
           {children}
         </main>
         <Toaster className="z-50" />

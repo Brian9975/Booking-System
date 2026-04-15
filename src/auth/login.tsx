@@ -24,7 +24,7 @@ export default function Login() {
 
   if (loading) {
     return (
-      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <div className="bg-slate-100 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
         <Spinner className="size-15" />
       </div>
     );
@@ -32,7 +32,7 @@ export default function Login() {
 
   if (loadingOnAct) {
     return (
-      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <div className="bg-slate-100 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
         <Spinner className="size-15" />
       </div>
     );
@@ -43,21 +43,16 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-linear-to-b from-blue-500 from-10% to-lime-300 to-90% min-h-screen ">
+    <div className="bg-slate-100 min-h-screen ">
       <div className="mb-7 text-center pt-5">
         <h1 className="text-center text-3xl sm:text-lg font-bold px-2">
           Welcome To Your Booking Manager.
         </h1>
-        <p className="my-5 text-sm md:text-md">
-          {" "}
-          Where All Your Customers And Bookings Are Managed Simply in one
-          Place.Please Login or Sign Up to get started.
-        </p>
 
         <p></p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="bg-blue-100 rounded-lg p-4 md:w-100 text-center">
+        <div className="bg-slate-800 text-slate-100 rounded-lg p-4 md:w-100 text-center">
           <h1 className="font-bold text-2xl">
             {loggedIn ? "Login" : "Sign Up"}
           </h1>
@@ -95,7 +90,7 @@ export default function Login() {
                 </button>
               </div>
             </div>
-            <button className="cursor-pointer w-full py-1 bg-blue-800 text-white rounded px-2">
+            <button className="cursor-pointer w-full py-1 bg-slate-100 text-slate-950 hover:bg-slate-200 font-bold rounded px-2">
               {loggedIn ? "Login" : "Create Account"}
             </button>
           </form>
@@ -103,7 +98,7 @@ export default function Login() {
             {loggedIn ? "Don't have an account?" : "Already have an account?"}
             <button
               onClick={() => setLoggedIn(!loggedIn)}
-              className="text-blue-800 ml-2 underline cursor-pointer"
+              className="text-lime-400 ml-2 underline cursor-pointer"
             >
               {loggedIn ? "Sign Up" : "Login"}
             </button>
@@ -113,7 +108,7 @@ export default function Login() {
           <div>
             <button
               onClick={logWithGoogle}
-              className="cursor-pointer px-2 py-1  w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-linear-to-b from-blue-200 from-10% to-lime-200 to-90%"
+              className="cursor-pointer px-2 py-1  w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-slate-100 text-slate-950"
             >
               <div>
                 <img className="w-5" src={GoogleLogo} alt="Google Logo" />
@@ -123,6 +118,10 @@ export default function Login() {
           </div>
         </div>
       </div>
+         <p className="my-5 text-sm text-center md:text-md">
+          Where All Your Customers And Bookings Are Managed Simply in one
+          Place.Please Login or Sign Up to get started.
+        </p>
       <Toaster />
     </div>
   );

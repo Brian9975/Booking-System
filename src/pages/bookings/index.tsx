@@ -74,7 +74,7 @@ export default function Bookings() {
 
   if (loadingOnAct) {
     return (
-      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <div className="bg-slate-100 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
         <Spinner className="size-10" />
         <div>
           <p className="font-light text-lg">Saving...</p>
@@ -84,16 +84,16 @@ export default function Bookings() {
   }
   return (
     <div>
-      <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">
+      <h1 className="sm:text-2xl text-slate-950 text-3xl mb-8 text-center font-bold">
         Bookings Management
       </h1>
 
       <div className="flex justify-center pb-5">
-        <div className="bg-blue-100 rounded-lg p-4 md:w-100 ">
-          <h1 className="text-lg font-light text-blue-800">
+        <div className="bg-slate-800 text-slate-100 rounded-lg p-4 md:w-100 ">
+          <h1 className="text-lg font-light text-lime-400">
             Create New Booking
           </h1>
-          <hr className="mb-4" />
+          <hr className="mb-4 text-slate-500" />
           <form
             onSubmit={(e) => {
               handleCreateBooking(
@@ -120,33 +120,33 @@ export default function Bookings() {
                   classNames={{
                     // The main container box
                     control: ({ isFocused }) =>
-                      `flex w-full mb-4 px-2 py-1 border-2 cursor-pointer rounded-md transition-all duration-200 
-           ${isFocused ? "border-blue-950 ring-2 ring-blue-100" : "border-blue-900 bg-blue-100"}`,
+                      `flex w-full mb-4 px-2 py-1 text-slate-100 border-2 cursor-pointer rounded-md transition-all duration-200 
+           ${isFocused ? "border-slate-500 text-slate-100 ring ring-slate-100 " : "border-slate-500 text-slate-100"}`,
 
                     // The input where you type to search
-                    input: () => "text-gray-600 focus:ring-0",
+                    input: () => "text-slate-100 focus:ring-0",
 
                     // The text for the currently selected item
-                    singleValue: () => "text-blue-950 font-bold",
+                    singleValue: () => "text-slate-100 font-bold",
 
                     // The placeholder text
                     placeholder: () => "text-gray-600",
 
                     // The dropdown menu container
                     menu: () =>
-                      "mt-2 border  border-gray-100 bg-lime-50 rounded-md shadow-xl overflow-auto",
+                      "mt-2 border  bg-slate-950  rounded-md shadow-xl overflow-auto",
 
                     // Individual items in the list
                     option: ({ isFocused, isSelected }) =>
-                      `  hover:bg-lime-300 hover:text-blue-950  px-3 py-2 transition-colors 
-           ${isSelected ? "bg-blue-900 text-blue-50" : isFocused ? "bg-blue-50 cursor-pointer" : "text-blue-950  "}`,
+                      `  hover:bg-slate-400 text-slate-100 px-3 py-2 transition-colors 
+           ${isSelected ? "bg-slate-500" : isFocused ? "bg-slate-50 text-slate-950 cursor-pointer" : "text-blue-950  "}`,
 
                     // The container for the "X" and "chevron" icons on the right
                     indicatorsContainer: () => "gap-1",
 
                     // The specific dropdown arrow icon
                     dropdownIndicator: () =>
-                      "text-gray-400 hover:text-blue-900",
+                      "text-gray-400 hover:text-slate-100",
 
                     // The separator line between text and arrow
                     indicatorSeparator: () => "bg-gray-200 w-[1px] my-1",
@@ -192,7 +192,7 @@ export default function Bookings() {
               />
             </div>
             <button
-              className="cursor-pointer font-bold px-2 py-2 w-full rounded bg-blue-900 text-blue-100 shadow-lg flex justify-center items-center gap-3 mt-2 "
+              className="cursor-pointer font-bold px-2 py-2 hover:bg-slate-200 w-full rounded bg-slate-100 text-slate-950 shadow-lg flex justify-center items-center gap-3 mt-2 "
               type="submit"
             >
               <CalendarPlus size={22} />
@@ -212,43 +212,43 @@ export default function Bookings() {
           <p>You can create a booking in the form above.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mx-2">
         <table className="w-full my-4">
           <thead>
             <tr>
-              <th className="text-left text-blue-900 px-2 border-black  border-2">
+              <th className="text-left text-slate-700 px-2 border-slate-800  border-2">
                 Customer
               </th>
-              <th className="border-2 text-blue-900 border-black text-left px-2">
+              <th className="border-2 text-slate-700 border-slate-800 text-left px-2">
                 Contact
               </th>
-              <th className="border-2 text-blue-900 border-black text-left px-2">
+              <th className="border-2 text-slate-700 border-slate-800 text-left px-2">
                 Service
               </th>
 
-              <th className="text-left px-4 text-blue-900 border-2 border-black">
+              <th className="text-left px-4 text-slate-700 border-2 border-slate-800">
                 Date
               </th>
-              <th className="border-2 text-blue-900 px-2 text-left border-black">
+              <th className="border-2 text-slate-700 px-2 text-left border-slate-800">
                 Status
               </th>
 
-              <th className="border-2 text-right text-blue-900 px-5 border-black">
+              <th className="border-2 text-right text-slate-700 px-5 border-slate-800">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
             {bookingInfo.map((data) => (
-              <tr className="border-2" key={data.id}>
+              <tr className="border-2 border-slate-800 text-slate-950" key={data.id}>
                 <td className="px-2">{data.name}</td>
-                <td className="border-2 px-2">0{Number(data.contact)}</td>
+                <td className="border-2 border-slate-800 px-2">0{Number(data.contact)}</td>
                 <td className="px-2">{data.service}</td>
-                <td className="border-2 text-left px-4">
+                <td className="border-2 border-slate-800 text-left px-4">
                   {formatToJsDate(data.date)}
                 </td>
                 <td
-                  className={`border-2 text-left border-black font-bold px-2 ${data.status === "Done" ? "text-lime-700" : "text-amber-700"}`}
+                  className={`border-2 border-slate-800 text-left font-bold px-2 ${data.status === "Done" ? "text-lime-700" : "text-amber-700"}`}
                 >
                   {data.status}
                 </td>
@@ -256,14 +256,14 @@ export default function Bookings() {
                   {data.status === "Pending" ? (
                     <button
                       onClick={() => setBookingToMark(data.id)}
-                      className="bg-lime-700 text-lime-100 text-sm sm:text-md w-30 sm:w-40 rounded-lg py-2 font-bold shadow-md shadow-lime-950 cursor-pointer px-2 my-2"
+                      className="bg-lime-700 text-lime-100 hover:bg-lime-600 text-sm sm:text-md w-30 sm:w-40 rounded-lg py-2 font-bold shadow-md shadow-lime-900 cursor-pointer px-2 my-2"
                     >
                       Mark as Done
                     </button>
                   ) : (
                     <button
                       onClick={() => setBookingToDel(data.id)}
-                      className="bg-blue-100 py-2 px-7 my-2 rounded-lg font-bold cursor-pointer shadow-md shadow-black"
+                      className="bg-red-400  py-2 px-7 my-2 hover:bg-red-500 hover:text-red-50 rounded-lg font-bold cursor-pointer shadow-md shadow-red-900"
                     >
                       Delete
                     </button>
@@ -286,7 +286,7 @@ export default function Bookings() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg"
+            className="bg-slate-800 text-slate-100 w-100 py-3 px-4 rounded-lg shadow-lg"
           >
             <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
             <p>This will update the booking status to done.</p>
@@ -294,7 +294,7 @@ export default function Bookings() {
             <div className="flex py-2 mt-4 justify-between items-center">
               <button
                 onClick={() => setBookingToMark(null)}
-                className="bg-lime-300 cursor-pointer shadow-md shadow-lime-600 py-2 px-6 rounded-lg"
+                className="bg-slate-500 font-bold hover:bg-slate-600 cursor-pointer shadow-md shadow-slate-700 py-2 px-6 rounded-lg"
               >
                 Cancel
               </button>
@@ -305,7 +305,7 @@ export default function Bookings() {
                     setBookingToMark(null);
                   }
                 }}
-                className="bg-blue-800 cursor-pointer py-2 px-6 shadow-md shadow-blue-950 rounded-lg text-blue-100"
+                className="bg-slate-100 font-bold hover:bg-slate-200 text-slate-950 cursor-pointer py-2 px-6 shadow-md shadow-slate-600 rounded-lg"
               >
                 Continue
               </button>
@@ -324,7 +324,7 @@ export default function Bookings() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg"
+            className="bg-slate-800 text-slate-100 w-100 py-3 px-4 rounded-lg shadow-lg"
           >
             <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
             <p>This action cannot be undone.</p>
@@ -332,7 +332,7 @@ export default function Bookings() {
             <div className="flex py-2 mt-4 justify-between items-center">
               <button
                 onClick={() => setBookingToDel(null)}
-                className="bg-lime-300 cursor-pointer shadow-md shadow-lime-600  py-2 px-6 rounded-lg"
+                className="cursor-pointer font-bold  px-6 py-2 bg-slate-500 mt-2 shadow-slate-600 hover:bg-slate-600 shadow-md  rounded-lg"
               >
                 Cancel
               </button>
@@ -343,7 +343,7 @@ export default function Bookings() {
                     setBookingToDel(null);
                   }
                 }}
-                className="bg-blue-800 shadow-blue-950 shadow-md cursor-pointer py-2 px-6 rounded-lg text-blue-100"
+                className="cursor-pointer font-bold hover:bg-slate-200 px-6 py-2 rounded-lg shadow-slate-500 shadow-md gap-3  mt-2 text-slate-950 bg-slate-100"
               >
                 Continue
               </button>

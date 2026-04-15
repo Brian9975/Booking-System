@@ -66,7 +66,7 @@ export default function Customers() {
 
   if (loadingOnAct) {
     return (
-      <div className="bg-blue-300 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
+      <div className="bg-slate-100 h-screen gap-1 inset-0 fixed flex justify-center items-center flex-col">
         <Spinner className="size-10" />
         <div>
           <p className="font-light text-lg">Saving...</p>
@@ -76,15 +76,15 @@ export default function Customers() {
   }
   return (
     <div>
-      <h1 className="sm:text-2xl text-3xl mb-8 text-center font-bold">
+      <h1 className="sm:text-2xl text-3xl mb-8 text-slate-950 text-center font-bold">
         Customers
       </h1>
       <div className="flex justify-center pb-5">
-        <div className="bg-blue-100  rounded-lg p-4 md:w-100 ">
-          <h1 className="text-lg font-light text-blue-800">
+        <div className="bg-slate-800 text-slate-100 rounded-lg p-4 md:w-100 ">
+          <h1 className="text-lg font-light text-lime-400">
             Customer's Details
           </h1>
-          <hr className="mb-4" />
+          <hr className="mb-4 text-slate-500" />
           <form onSubmit={handleAddCustomer} className="mb-2">
             <div>
               <label htmlFor="name" className="font-bold">
@@ -94,7 +94,7 @@ export default function Customers() {
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
                 id="name"
-                className="border mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
+                className="border border-slate-500 mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
                 type="text"
                 placeholder="eg. John Doe"
                 required
@@ -106,7 +106,7 @@ export default function Customers() {
               </label>
               <input
                 onChange={(e) => setContact(Number(e.target.value))}
-                className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
+                className="border border-slate-500 mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
                 type="number"
                 value={contact}
                 placeholder="eg. 0711122222"
@@ -114,7 +114,7 @@ export default function Customers() {
               />
             </div>
             <button
-              className="cursor-pointer px-2 py-2 w-full rounded shadow-lg flex justify-center items-center gap-3 mt-2 bg-linear-to-b from-blue-800 from-10% to-lime-100 to-90%"
+              className="cursor-pointer px-2 py-2 w-full text-slate-950 hover:bg-slate-200 rounded shadow-slate-600 shadow-md flex justify-center items-center gap-3 mt-2 bg-slate-100"
               type="submit"
             >
               <UserPlus size={22} />
@@ -136,37 +136,37 @@ export default function Customers() {
           <p>Fill the form above to add new customer.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mx-2">
         <table className="w-full my-4">
           <thead>
             <tr>
-              <th className="text-left text-blue-900 px-2 border-black  border-2">
+              <th className="text-left text-slate-700 px-2 border-slate-800  border-2">
                 Name
               </th>
-              <th className="border-2 text-blue-900 border-black text-left px-2">
+              <th className="border-2 text-slate-700 border-slate-800 text-left px-2">
                 Contact
               </th>
-              <th className="border-2 text-blue-900 border-black text-left px-2">
+              <th className="border-2 text-slate-700 border-slate-800 text-left px-2">
                 Date Added
               </th>
 
-              <th className="text-right px-5 text-blue-900 border-2 border-black">
+              <th className="text-right px-5 text-slate-700 border-2 border-slate-800">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
             {customerData.map((data) => (
-              <tr className="border-2" key={data.id}>
+              <tr className="border-2 text-slate-950 border-slate-800" key={data.id}>
                 <td className="px-2">{data.name}</td>
-                <td className="border-2 px-2">0{Number(data.contact)}</td>
+                <td className="border-2 border-slate-800 px-2">0{Number(data.contact)}</td>
                 <td className="px-2">{formatToJsDate(data.createdAt)}</td>
-                <td className=" border-2 text-right px-2">
+                <td className=" border-2 border-slate-800 text-right px-2">
                   <div className="flex flex-col gap-2  items-end justify-center m-2">
                     <div>
                       <button
                         onClick={() => setCustomerToEdit(data.id)}
-                        className="bg-blue-800 w-30 h-10  shadow-md shadow-blue-950 my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-100 "
+                        className="bg-slate-800 w-30 h-10  shadow-md shadow-slate-600 my-2 px-5 font-bold hover:bg-slate-700 cursor-pointer py-1 rounded-lg text-blue-100 "
                       >
                         Edit
                       </button>
@@ -174,7 +174,7 @@ export default function Customers() {
                     <div>
                       <button
                         onClick={() => setCusToDel(data.id)}
-                        className="bg-blue-100 w-30  h-10 shadow-md shadow-black my-2 px-5 font-bold hover:opacity-90 cursor-pointer py-1 rounded-lg text-blue-950 "
+                        className="bg-red-400 w-30  h-10 shadow-md shadow-red-900 my-2 px-5 font-bold hover:bg-red-500 hover:text-red-50 cursor-pointer py-1 rounded-lg  "
                       >
                         Delete
                       </button>
@@ -196,12 +196,12 @@ export default function Customers() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="shadow-xl bg-white rounded-lg p-4 md:w-100 "
+            className="shadow-xl bg-slate-800 text-slate-100 rounded-lg p-4 md:w-100 "
           >
-            <h1 className="text-lg font-light text-blue-800">
+            <h1 className="text-lg font-light text-lime-400">
               Edit Customer's Details
             </h1>
-            <hr className="mb-4" />
+            <hr className="mb-4 text-slate-500" />
             <form onSubmit={handleEdit} className="mb-2">
               <div>
                 <label htmlFor="name" className="font-bold">
@@ -211,7 +211,7 @@ export default function Customers() {
                   value={editCusName}
                   onChange={(e) => setEditCusName(e.target.value)}
                   id="name"
-                  className="border mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
+                  className="border border-slate-500 mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
                   type="text"
                   placeholder="eg. John Doe"
                   required
@@ -223,7 +223,7 @@ export default function Customers() {
                 </label>
                 <input
                   onChange={(e) => setEditContact(Number(e.target.value))}
-                  className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
+                  className="border mb-7 ring w-full border-slate-500 placeholder-gray-600 my-2 rounded px-2 py-1"
                   type="number"
                   value={editContact}
                   placeholder="eg. 0711122222"
@@ -233,14 +233,14 @@ export default function Customers() {
 
               <div className="flex justify-between items-center">
                 <button
-                  className="cursor-pointer  px-6 py-2 shadow-lime-600 shadow-md bg-lime-300 rounded-lg"
+                  className="cursor-pointer  px-6 py-2 bg-slate-500 shadow-slate-700 hover:bg-slate-600 shadow-md  rounded-lg"
                   type="button"
                   onClick={() => setCustomerToEdit(null)}
                 >
                   <div className="font-bold">Cancel</div>
                 </button>
                 <button
-                  className="cursor-pointer px-6 py-2 rounded-md shadow-blue-950 shadow-md gap-3 mt-2 text-blue-100 bg-blue-800"
+                  className="cursor-pointer hover:bg-slate-200 px-6 py-2 rounded-lg shadow-slate-600 shadow-md gap-3  mt-2 text-slate-950 bg-slate-100"
                   type="submit"
                 >
                   <div className="font-bold">Save</div>
@@ -260,7 +260,7 @@ export default function Customers() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-blue-100 w-100 py-3 px-4 rounded-lg shadow-lg"
+            className="bg-slate-800 text-slate-100 w-100 py-3 px-4 rounded-lg shadow-lg"
           >
             <h1 className="font-bold text-xl mb-4">Are you absolutely sure?</h1>
             <p>This action cannot be undone.</p>
@@ -268,7 +268,7 @@ export default function Customers() {
             <div className="flex py-2 mt-4 justify-between items-center">
               <button
                 onClick={() => setCusToDel(null)}
-                className="bg-lime-300 shadow-md shadow-lime-600 cursor-pointer py-2 px-6 rounded-lg"
+                className="cursor-pointer font-bold  px-6 py-2 bg-slate-500 mt-2 shadow-slate-600 hover:bg-slate-600 shadow-md  rounded-lg"
               >
                 Cancel
               </button>
@@ -277,7 +277,7 @@ export default function Customers() {
                   handleDelCus(cusToDel);
                   setCusToDel(null);
                 }}
-                className="bg-blue-800 cursor-pointer py-2 px-6 rounded-lg shadow-md shadow-blue-950  text-blue-100"
+                className="cursor-pointer font-bold hover:bg-slate-200 px-6 py-2 rounded-lg shadow-slate-500 shadow-md gap-3  mt-2 text-slate-950 bg-slate-100"
               >
                 Continue
               </button>
