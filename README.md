@@ -1,3 +1,4 @@
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 31 29" src="https://github.com/user-attachments/assets/af76a812-324c-4c56-b66c-3561c8a3426e" />
 # Your Booking Manager
 
 A business management system for tracking customers and bookings.
