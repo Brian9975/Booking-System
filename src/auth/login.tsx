@@ -44,19 +44,24 @@ export default function Login() {
 
   return (
     <div className="bg-slate-100 min-h-screen ">
-      <div className="mb-7 text-center pt-5">
-        <h1 className="text-center text-slate-950 text-xl sm:text-lg font-bold px-2">
+      <div className="bg-slate-800 top-0 fixed w-full py-3 text-slate-100">
+        <h1 className="font-bold pl-2">Your Booking Manager</h1>
+      </div>
+
+<div className="flex flex-col items-center justify-center  h-screen">
+      <div className="mb-2 mt-4  text-center pt-5">
+        <h1 className="text-center  text-slate-950 text-xl sm:text-lg font-bold px-2">
           Welcome To Your Booking Manager.
         </h1>
 
         <p></p>
       </div>
       <div className="flex justify-center items-center">
-        <div className="bg-slate-800 text-slate-100 rounded-lg p-4 md:w-100 text-center">
+        <div className="bg-slate-800 mb-10 text-slate-100 rounded-lg py-3 px-4 md:w-100 text-center">
           <h1 className="font-bold text-2xl">
             {loggedIn ? "Login" : "Sign Up"}
           </h1>
-          <form onSubmit={handleLogin} className="mb-5">
+          <form onSubmit={handleLogin} className="mb-3">
             <div>
               <div className="text-left mb-1 mt-4">
                 <label className="font-bold">Email</label>
@@ -118,8 +123,9 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="bg-slate-800 text-slate-100 fixed bottom-0  w-full">
-         <p className="text-sm my-3 text-center text-slate-100 md:text-md">
+      </div>
+      <div className="bg-slate-800 py-2 px-4 text-slate-100 fixed bottom-0  w-full">
+         <p className="text-xs sm:text-md text-center text-slate-100">
           Where All Your Customers And Bookings Are Managed Simply in one
           Place.Please Login or Sign Up to get started.
         </p>
