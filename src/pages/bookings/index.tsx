@@ -206,7 +206,7 @@ export default function Bookings() {
       {loadingData ? (
         <SkeletonTable />
       ) : bookingInfo.length === 0 ? (
-        <div className="text-center mt-4 flex border-2 mb-7 rounded-lg p-2 justify-center flex-col items-center">
+        <div className="text-center mt-4 flex border-2 mb-7 rounded-lg p-2 justify-center mx-4 flex-col items-center">
           <CalendarX size={50} />
           <h1 className="text-xl mt-1 font-bold">No bookings added yet!</h1>
           <p>You can create a booking in the form above.</p>

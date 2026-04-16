@@ -128,7 +128,7 @@ export default function Customers() {
       {loadingData ? (
         <SkeletonTable />
       ) : customerData.length === 0 ? (
-        <div className="text-center mt-4 mb-7 flex border-2 rounded-lg p-2 justify-center flex-col items-center">
+        <div className="text-center mx-4 mt-4 mb-7 flex border-2 rounded-lg p-2 justify-center flex-col items-center">
           <UserX size={50} />
           <h1 className="text-xl mt-1 font-bold">
             No customers added at the moment!
