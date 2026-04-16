@@ -1,4 +1,4 @@
-<img width="1365" height="665" alt="Screenshot 2026-04-16 13 31 29" src="https://github.com/user-attachments/assets/af76a812-324c-4c56-b66c-3561c8a3426e" />
+
 # Your Booking Manager
 
 A business management system for tracking customers and bookings.
@@ -16,7 +16,7 @@ https://your-booking-manager.vercel.app
 ## Tech Stack
 React, TypeScript, Tailwind CSS, ShadCN UI, Firebase
 
-
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 31 29" src="https://github.com/user-attachments/assets/af76a812-324c-4c56-b66c-3561c8a3426e" />
 <img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 04" src="https://github.com/user-attachments/assets/9561ef2d-05ac-4231-944c-f1da7693122c" />
 <img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 12" src="https://github.com/user-attachments/assets/c5ede814-248e-49ff-9552-d70faf2457e1" />
 <img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 28" src="https://github.com/user-attachments/assets/1169c11d-a1c5-4f12-aa68-0936c4dd4003" />
