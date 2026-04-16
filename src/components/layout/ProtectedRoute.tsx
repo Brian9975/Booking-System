@@ -45,7 +45,7 @@ export default function ProtectedRoute({
       <div className="bg-slate-800 text-slate-100 border-b-2 border-slate-950 shadow-slate-600 shadow-md items-center justify-between flex py-3 px-2">
         <div>
           {" "}
-          <h1 className="font-extrabold text-lg">C & B System</h1>
+          <h1 className="font-extrabold text-lg">Your Booking Manager</h1>
         </div>
 
         <div className="flex justify-center items-center gap-9 mr-2">
@@ -87,9 +87,15 @@ export default function ProtectedRoute({
           <div>
             <button
               onClick={logout}
-              className="bg-lime-400 shadow-lime-700 shadow-md hover:opacity-80 cursor-pointer px-6 py-1 my-2 rounded-lg"
+              className="bg-lime-500 shadow-lime-700 shadow-md hover:opacity-80 cursor-pointer px-4 py-1 my-2 rounded-lg"
+
+
             >
-              Logout
+              <div className="flex justify-center items-center gap-2">
+              <LogOut size={17}/>
+              
+              <div>Logout</div>
+              </div>
             </button>
           </div>
         </div>
@@ -123,7 +129,7 @@ export default function ProtectedRoute({
             </div>
             <button
               onClick={logout}
-              className="bg-lime-400 mt-5 shadow-md shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
+              className="bg-lime-500 mt-5 shadow-md shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
             >
               <div className="flex gap-2 justify-center items-center ">
                 <LogOut size={20} />

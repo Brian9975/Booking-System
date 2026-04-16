@@ -167,7 +167,7 @@ export default function Bookings() {
                 Service
               </label>
               <input
-                className="border mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
+                className="border mb-7 outline-none ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
                 type="text"
                 onChange={(e) => setService(e.target.value)}
                 value={service}
@@ -185,7 +185,7 @@ export default function Bookings() {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 id="date"
-                className="w-full border-2 py-1 px-2 rounded-md mb-4 cursor-pointer"
+                className="w-full  ring-1 border py-1 px-2 rounded-md mb-4 cursor-pointer"
                 type="date"
                 min={new Date().toISOString().split("T")[0]}
                 required
@@ -212,7 +212,7 @@ export default function Bookings() {
           <p>You can create a booking in the form above.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto mx-2">
+        <div className="overflow-x-auto mx-4 mb-4">
         <table className="w-full my-4">
           <thead>
             <tr>

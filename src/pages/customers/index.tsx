@@ -94,7 +94,7 @@ export default function Customers() {
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
                 id="name"
-                className="border border-slate-500 mt-2 mb-7 ring w-full  rounded placeholder-gray-600 px-2 py-1"
+                className="border border-slate-500 mt-2 mb-7 ring-1 outline-none w-full  rounded placeholder-gray-600 px-2 py-1"
                 type="text"
                 placeholder="eg. John Doe"
                 required
@@ -106,7 +106,7 @@ export default function Customers() {
               </label>
               <input
                 onChange={(e) => setContact(Number(e.target.value))}
-                className="border border-slate-500 mb-7 ring w-full placeholder-gray-600 my-2 rounded px-2 py-1"
+                className="border border-slate-500 mb-7 ring-1 outline-none w-full placeholder-gray-600 my-2 rounded px-2 py-1"
                 type="number"
                 value={contact}
                 placeholder="eg. 0711122222"
@@ -136,7 +136,7 @@ export default function Customers() {
           <p>Fill the form above to add new customer.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto mx-2">
+        <div className="overflow-x-auto mb-4 mx-4">
         <table className="w-full my-4">
           <thead>
             <tr>

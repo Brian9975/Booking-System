@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <div className="bg-slate-100 min-h-screen ">
       <div className="mb-7 text-center pt-5">
-        <h1 className="text-center text-3xl sm:text-lg font-bold px-2">
+        <h1 className="text-center text-slate-950 text-xl sm:text-lg font-bold px-2">
           Welcome To Your Booking Manager.
         </h1>
 
@@ -63,7 +63,7 @@ export default function Login() {
               </div>
               <input
                 onChange={(e) => setEmail(e.target.value)}
-                className="border ring w-full mb-5 rounded placeholder-gray-600 px-2 py-1"
+                className="border outline-none ring-1 w-full mb-5 rounded placeholder-gray-600 px-2 py-1"
                 type="email"
                 placeholder="Email"
                 required
@@ -76,7 +76,7 @@ export default function Login() {
               <div className="relative mb-5">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
-                  className="border ring w-full placeholder-gray-600 rounded px-2  py-1"
+                  className="border ring-1 outline-none w-full placeholder-gray-600 rounded px-2  py-1"
                   type={`${showPassword ? "text" : "password"}`}
                   placeholder="Password"
                   required
@@ -118,10 +118,12 @@ export default function Login() {
           </div>
         </div>
       </div>
-         <p className="my-5 text-sm text-center md:text-md">
+      <div className="bg-slate-800 text-slate-100 fixed bottom-0  w-full">
+         <p className="text-sm my-3 text-center text-slate-100 md:text-md">
           Where All Your Customers And Bookings Are Managed Simply in one
           Place.Please Login or Sign Up to get started.
         </p>
+        </div>
       <Toaster />
     </div>
   );
