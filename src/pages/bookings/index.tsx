@@ -185,7 +185,7 @@ export default function Bookings() {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 id="date"
-                className="w-full  ring-1 border py-1 px-2 rounded-md mb-4 cursor-pointer"
+                className="w-full outline-none  ring-1 border py-1 px-2 rounded-md mb-4 cursor-pointer"
                 type="date"
                 min={new Date().toISOString().split("T")[0]}
                 required
