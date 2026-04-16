@@ -1,75 +1,23 @@
-# React + TypeScript + Vite
+# Your Booking Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A business management system for tracking customers and bookings.
 
-Currently, two official plugins are available:
+## Live Demo
+https://your-booking-manager.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- Email and Google authentication
+- Customer management with full CRUD
+- Booking creation with customer, service and date
+- Mark bookings as done and delete them
+- Mobile responsive design
 
-## React Compiler
+## Tech Stack
+React, TypeScript, Tailwind CSS, ShadCN UI, Firebase
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 04" src="https://github.com/user-attachments/assets/9561ef2d-05ac-4231-944c-f1da7693122c" />
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 12" src="https://github.com/user-attachments/assets/c5ede814-248e-49ff-9552-d70faf2457e1" />
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 28" src="https://github.com/user-attachments/assets/1169c11d-a1c5-4f12-aa68-0936c4dd4003" />
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 36" src="https://github.com/user-attachments/assets/b4c90dd0-294c-4228-9e31-f6ca1cde7ed3" />
+<img width="1365" height="665" alt="Screenshot 2026-04-16 13 32 54" src="https://github.com/user-attachments/assets/e2981721-ac85-4a75-9a2b-338daac99382" />
