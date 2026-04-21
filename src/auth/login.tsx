@@ -48,14 +48,7 @@ export default function Login() {
         <h1 className="font-bold pl-2">Your Booking Manager</h1>
       </div>
 
-<div className="flex flex-col items-center justify-center  h-screen">
-      <div className="mb-2 mt-4  text-center pt-5">
-        <h1 className="text-center  text-slate-950 text-xl sm:text-lg font-bold px-2">
-          Welcome To Your Booking Manager.
-        </h1>
-
-        <p></p>
-      </div>
+<div className="flex flex-col items-center justify-center pt-15  h-screen">
       <div className="flex justify-center items-center">
         <div className="bg-slate-800 mb-10 text-slate-100 rounded-lg py-3 px-4 md:w-100 text-center">
           <h1 className="font-bold text-2xl">
@@ -70,7 +63,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="border outline-none ring-1 w-full mb-5 rounded placeholder-gray-600 px-2 py-1"
                 type="email"
-                placeholder="Email"
+                placeholder="Fill your email..."
                 required
               />
             </div>
@@ -83,7 +76,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="border ring-1 outline-none w-full placeholder-gray-600 rounded px-2  py-1"
                   type={`${showPassword ? "text" : "password"}`}
-                  placeholder="Password"
+                  placeholder="Include your password..."
                   required
                 />
                 <button
