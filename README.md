@@ -7,6 +7,7 @@ A business management system for tracking customers and bookings.
 https://your-booking-manager.vercel.app
 
 ## Features
+- Created a secure multi-tenant architecture using Firebase ensuring total data isolation for different businesses.
 - Email and Google authentication
 - Customer management with full CRUD
 - Booking creation with customer, service and date
