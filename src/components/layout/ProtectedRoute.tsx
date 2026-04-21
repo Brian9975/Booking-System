@@ -42,7 +42,7 @@ export default function ProtectedRoute({
   return (
     <div className="bg-slate-100 text-slate-950 min-h-screen">
       {/* Topbar */}
-      <div className="bg-slate-800 text-slate-100 border-b-2 border-slate-950 shadow-slate-600 shadow-md items-center justify-between flex py-3 px-2">
+      <div className="bg-slate-800 text-slate-100 border-slate-950 shadow-slate-600 shadow-md items-center justify-between flex py-3 px-2">
         <div>
           {" "}
           <h1 className="font-extrabold text-lg">Your Booking Manager</h1>
@@ -73,21 +73,21 @@ export default function ProtectedRoute({
         </div>
       </div>
       {showMenu && (
-        <div className="bg-slate-800 text-center sm:hidden p-2 shadow-md shadow-slate-600">
+        <div className="bg-slate-800  border-b-2 text-center sm:hidden p-2 shadow-md shadow-slate-400">
           <div className="py-1">
-            <Link className="font-bold text-lg hover:opacity-80 text-slate-50" to="/customers">
+            <Link onClick={() => setShowMenu(false)} className="font-bold text-lg hover:opacity-80 text-slate-50" to="/customers">
               Customers
             </Link>
           </div>
           <div className="py-2">
-            <Link className="font-bold hover:opacity-80 text-lg text-slate-50" to="/bookings">
+            <Link onClick={() => setShowMenu(false)} className="font-bold hover:opacity-80 text-lg text-slate-50" to="/bookings">
               Bookings
             </Link>
           </div>
           <div>
             <button
               onClick={logout}
-              className="bg-lime-500 shadow-lime-700 shadow-md hover:opacity-80 cursor-pointer px-4 py-1 my-2 rounded-lg"
+              className="bg-lime-500 shadow-lime-700 shadow-sm hover:opacity-80 cursor-pointer px-4 py-1 my-2 rounded-lg"
 
 
             >
@@ -129,7 +129,7 @@ export default function ProtectedRoute({
             </div>
             <button
               onClick={logout}
-              className="bg-lime-500 mt-5 shadow-md shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
+              className="bg-lime-500 mt-5 shadow-sm shadow-lime-700 hover:opacity-80 cursor-pointer w-40 p-2 rounded-md"
             >
               <div className="flex gap-2 justify-center items-center ">
                 <LogOut size={20} />
